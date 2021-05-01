@@ -99,3 +99,24 @@ def detail(id):
 
         return render_template('/accounts/detail.html',id=id, det=det)
 
+@app.route('/accounts/deposit/<int:id>', methods=['GET','POST'])
+def deposit(id):
+    if request.method == 'POST':
+        if logdata.idcust() == "":
+            return "LOGIN FIRST"
+        else:
+            deps = request.form['amount']
+            cur = mysql.connection.cursor()
+            dep = cur.execute(f"select balance from accounts where accountid='{id}'")
+            dep = cur.fetchall()
+
+            return render_template('/accounts.html',id=id, dep=dep)
+    else:
+        if logdata.idcust() == "":
+            return "LOGIN FIRST"
+        else:
+            cur = mysql.connection.cursor()
+            dep = cur.execute(f"select * from accounts where accountid='{id}'")
+            dep = cur.fetchall()
+
+            return render_template('/accounts/deposit.html',id=id, dep=dep)

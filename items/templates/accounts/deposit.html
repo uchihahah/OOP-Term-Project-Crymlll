@@ -1,0 +1,27 @@
+
+<div class="content">
+    <h1 style="text-align: center">Account Deposit</h1>
+    <table>
+        <tr>
+            <th>ACCOUNTID</th>
+            <th>CUSTOMERID</th>
+            <th>TYPE</th>
+            <th>BALANCE</th>
+            <br>
+            <th>DEPOSIT</th>
+        </tr>
+        {% for d in dep %}
+            <tr>
+                <td>{{ d[0] }}</td>
+                <td>{{ d[1] }}</td>
+                <td>{{ d[2] }}</td>
+                <td>{{ d[3] }}</td>
+                <br>
+                <td>
+                    <input type="text" name="amount" required/> 
+                    <input type="submit" value="Deposit"/>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
