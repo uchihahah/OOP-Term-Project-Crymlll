@@ -1,0 +1,20 @@
+
+<div class="content">
+    <h1 style="text-align: center">Account</h1>
+    <table>
+        <tr>
+            <th>ACCOUNTID</th>
+            <th>DATETIME</th>
+            <th>TRANSACTION TYPE</th>
+            <th>AMOUNT</th>
+        </tr>
+        {% for printrep in printrepdetail %}
+            <tr>
+                <td>{{ printrep[0] }}</td>
+                <td>{{ printrep[1] }}</td>
+                <td>{{ printrep[2] }}</td>
+                <td>{{ printrep[3] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

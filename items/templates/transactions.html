@@ -1,0 +1,20 @@
+
+<div class="content">
+    <h1 style="text-align: center">HISTORY</h1>
+    <table>
+        <tr>
+            <th>ACCOUNTID</th>
+            <th>DATETIME</th>
+            <th>WITHDRAW</th>
+            <th>AMOUNT</th>
+        </tr>
+        {% for transac in transacdetail %}
+            <tr>
+                <td>{{ transac[0] }}</td>
+                <td>{{ transac[1] }}</td>
+                <td>{{ transac[2] }}</td>
+                <td>{{ transac[3] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
