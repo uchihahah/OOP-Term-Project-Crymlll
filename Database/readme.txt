@@ -1,0 +1,1 @@
+Install Xampp terlebih dahulu, masuk ke folder xampp, lalu copy pada folder mysql
