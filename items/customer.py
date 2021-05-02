@@ -91,6 +91,7 @@ def transactions():
 
 @app.route('/accounts/detail/<int:id>', methods=['GET'])
 def detail(id):
+    global acc
     if logdata.idcust() == "":
         return "LOGIN FIRST"
     else:
@@ -100,11 +101,11 @@ def detail(id):
 
 
         if str(det[0][2]) == "Saving":
-            acc = Saving(det[0][2],det[0][3])
+            acc = Saving(det[0][0],det[0][3])
         elif str(det[0][2]) == "Checking Account":
-            acc = Checking(det[0][2],det[0][3])
+            acc = Checking(det[0][9],det[0][3])
         elif str(det[0][2]) == "Loan":
-            acc = Loan(det[0][2],det[0][3])
+            acc = Loan(det[0][0],det[0][3])
 
         print(acc.__dict__)
 
@@ -120,6 +121,10 @@ def deposit(id):
             cur = mysql.connection.cursor()
             dep = cur.execute(f"select balance from accounts where accountid='{id}'")
             dep = cur.fetchall()
+
+            depo = int(deps)
+
+            acc.deposit(depo)
 
             return redirect('/accounts')
     else:
