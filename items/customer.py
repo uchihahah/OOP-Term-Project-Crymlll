@@ -113,43 +113,55 @@ def detail(id):
 @app.route('/accounts/deposit/<int:id>', methods=['GET','POST'])
 def deposit(id):
     if request.method == 'POST':
-        if logdata.idcust() == "":
-            return "LOGIN FIRST"
-        else:
-            deps = request.form['amount']
-            cur = mysql.connection.cursor()
-            dep = cur.execute(f"select balance from accounts where accountid='{id}'")
-            dep = cur.fetchall()
+        try:
+            if logdata.idcust() == "":
+                return "LOGIN FIRST"
+            else:
+                deps = request.form['amount']
+                cur = mysql.connection.cursor()
+                dep = cur.execute(f"select balance from accounts where accountid='{id}'")
+                dep = cur.fetchall()
 
-            return redirect('/accounts')
+                return redirect('/accounts')
+        except:
+            return "You must login first!"
     else:
-        if logdata.idcust() == "":
-            return "LOGIN FIRST"
-        else:
-            cur = mysql.connection.cursor()
-            dep = cur.execute(f"select * from accounts where accountid='{id}'")
-            dep = cur.fetchall()
+        try:
+            if logdata.idcust() == "":
+                return "LOGIN FIRST"
+            else:
+                cur = mysql.connection.cursor()
+                dep = cur.execute(f"select * from accounts where accountid='{id}'")
+                dep = cur.fetchall()
 
-            return render_template('/accounts/deposit.html',id=id, dep=dep)
+                return render_template('/accounts/deposit.html',id=id, dep=dep)
+        except:
+            return "You must login first!"
 
 @app.route('/accounts/withdraw/<int:id>', methods=['GET','POST'])
 def withs(id):
     if request.method == 'POST':
-        if logdata.idcust() == "":
-            return "LOGIN FIRST"
-        else:
-            withs = request.form['amount']
-            cur = mysql.connection.cursor()
-            withs = cur.execute(f"select balance from accounts where accountid='{id}'")
-            withs = cur.fetchall()
+        try:
+            if logdata.idcust() == "":
+                return "LOGIN FIRST"
+            else:
+                withs = request.form['amount']
+                cur = mysql.connection.cursor()
+                withs = cur.execute(f"select balance from accounts where accountid='{id}'")
+                withs = cur.fetchall()
 
-            return redirect('/accounts')
+                return redirect('/accounts')
+        except:
+            return "You must login first!"
     else:
-        if logdata.idcust() == "":
-            return "LOGIN FIRST"
-        else:
-            cur = mysql.connection.cursor()
-            wd = cur.execute(f"select * from accounts where accountid='{id}'")
-            wd = cur.fetchall()
+        try:
+            if logdata.idcust() == "":
+                return "LOGIN FIRST"
+            else:
+                cur = mysql.connection.cursor()
+                wd = cur.execute(f"select * from accounts where accountid='{id}'")
+                wd = cur.fetchall()
 
-            return render_template('/accounts/withdraw.html',id=id, wd=wd)
+                return render_template('/accounts/withdraw.html',id=id, wd=wd)
+        except:
+            return "You must login first!"
