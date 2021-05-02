@@ -10,6 +10,7 @@ class Account:
     def deposit(self,depo):
         cur = mysql.connection.cursor()
         cur.execute(f"update accounts set balance={int(self.__balance + depo)} where accountid='{self.__id}'")
+        cur.connection.commit()
         cur.close()
         
     def withdraw(self):

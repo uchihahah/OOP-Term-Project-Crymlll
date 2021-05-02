@@ -128,6 +128,7 @@ def deposit(id):
             acc.deposit(depo)
 
             return redirect('/accounts')
+            
         except:
             return "You must login first!"
     else:
