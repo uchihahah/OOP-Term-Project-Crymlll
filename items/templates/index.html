@@ -1,10 +1,50 @@
-<div class="TEST">
-    <h1 style="text-align: center">CRYMLLL BANK - BEST SECURE BANK SYSTEM</h1>
-    <a href="/login">CUSTOMER</a>
-    <br>
-    <br>
-    <a href="/admin">ADMIN</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='login.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="button-box">
+                <div class="button">
+                    <div id="btn"></div>
+                    <button type="button" class="btn-click" onclick="customer()">Customer</button>
+                    <button type="button" class="btn-click" onclick="admin()">Admin</button>
+                </div>
+                <form id="customer" class="input">
+                    <input type="text" class="field" placeholder="ID" required>
+                    <input type="text" class="field" placeholder="Password" required>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                <form id="admin" class="input">
+                    <input type="text" class="field" placeholder="ID" required>
+                    <input type="text" class="field" placeholder="Password" required>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                
+            </div>
+        </div>
+        
+        <script>
+            var x = document.getElementById("customer")
+            var y = document.getElementById("admin")
+            var z = document.getElementById("btn")
 
-</div>
+            function admin(){
+                x.style.left = "-400px"
+                y.style.left = "50px"
+                z.style.left = "110px"
+            }
 
-
+            function customer(){
+                x.style.left = "50px"
+                y.style.left = "450px"
+                z.style.left = "0px"
+            }
+        </script>
+    </body>
+</html>
