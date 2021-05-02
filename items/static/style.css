@@ -24,34 +24,35 @@ html,body{
 h1{
     position: relative;
     left: 80px;
+    top: 20px;
     font-size: 20px;
 }
 
-h2{
-    position: relative;
-    top: 20px;
-    left: 90px;
-    font-size: 15px;
-}
 
-#transaksi{
+#text-customer{
     position: relative;
-    top: 30px;
-    left: 110px;
-    font-size: 10px;
+    top: 10px;
+    left: 140px;
+    font-size: 20px;
     text-decoration: none;
 }
 
-#account{
+#customer{
     position: relative;
-    left: -90px;
-    top: -20px;
+    top: 20px;
+    left: -30px;
 }
 
-#text-account{
+#admin{
+    position: relative;
+    left: -80px;
+    top: -30px;
+}
+
+#text-admin{
     position: relative;
     top: 80px;
-    left: 140px;
-    font-size: 10px;
+    left: 160px;
+    font-size: 20px;
     text-decoration: none
 }
