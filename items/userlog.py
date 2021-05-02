@@ -1,15 +1,17 @@
 from flask import Flask,render_template,request
 from flask_mysqldb import MySQL
-
+from items import *
 
 class Account:
-    def __init__ (self,idcost,balance):
-        self.__id=idcost
+    def __init__ (self,idacc,balance):
+        self.__id=idacc
         self.__balance=balance
     
-    def deposit(self):
-        pass
-
+    def deposit(self,depo):
+        cur = mysql.connection.cursor()
+        cur.execute(f"update accounts set balance={int(self.__balance + depo)} where accountid='{self.__id}'")
+        cur.close()
+        
     def withdraw(self):
         pass
 
