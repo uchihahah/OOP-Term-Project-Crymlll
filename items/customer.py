@@ -88,6 +88,7 @@ def transactions():
         return "LOGIN FIRST BEFORE CONTINUE"
 
 
+
 @app.route('/accounts/detail/<int:id>', methods=['GET'])
 def detail(id):
     if logdata.idcust() == "":
@@ -96,6 +97,16 @@ def detail(id):
         cur = mysql.connection.cursor()
         det = cur.execute(f"select * from accounts where accountid='{id}'")
         det = cur.fetchall()
+
+
+        if str(det[0][2]) == "Saving":
+            acc = Saving(det[0][2],det[0][3])
+        elif str(det[0][2]) == "Checking Account":
+            acc = Checking(det[0][2],det[0][3])
+        elif str(det[0][2]) == "Loan":
+            acc = Loan(det[0][2],det[0][3])
+
+        print(acc.__dict__)
 
         return render_template('/accounts/detail.html',id=id, det=det)
 
@@ -110,7 +121,7 @@ def deposit(id):
             dep = cur.execute(f"select balance from accounts where accountid='{id}'")
             dep = cur.fetchall()
 
-            return render_template('/accounts.html',id=id, dep=dep)
+            return redirect('/accounts')
     else:
         if logdata.idcust() == "":
             return "LOGIN FIRST"
@@ -120,3 +131,25 @@ def deposit(id):
             dep = cur.fetchall()
 
             return render_template('/accounts/deposit.html',id=id, dep=dep)
+
+@app.route('/accounts/withdraw/<int:id>', methods=['GET','POST'])
+def withs(id):
+    if request.method == 'POST':
+        if logdata.idcust() == "":
+            return "LOGIN FIRST"
+        else:
+            withs = request.form['amount']
+            cur = mysql.connection.cursor()
+            withs = cur.execute(f"select balance from accounts where accountid='{id}'")
+            withs = cur.fetchall()
+
+            return redirect('/accounts')
+    else:
+        if logdata.idcust() == "":
+            return "LOGIN FIRST"
+        else:
+            cur = mysql.connection.cursor()
+            wd = cur.execute(f"select * from accounts where accountid='{id}'")
+            wd = cur.fetchall()
+
+            return render_template('/accounts/withdraw.html',id=id, wd=wd)

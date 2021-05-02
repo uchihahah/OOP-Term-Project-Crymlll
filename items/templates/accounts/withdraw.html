@@ -1,0 +1,27 @@
+
+<div class="content">
+    <h1 style="text-align: center">Account Withdraw</h1>
+    <table>
+        <tr>
+            <th>ACCOUNTID</th>
+            <th>CUSTOMERID</th>
+            <th>TYPE</th>
+            <th>BALANCE</th>
+            <th>DEPOSIT</th>
+        </tr>
+        {% for w in wd %}
+            <tr>
+                <td>{{ w[0] }}</td>
+                <td>{{ w[1] }}</td>
+                <td>{{ w[2] }}</td>
+                <td>{{ w[3] }}</td>
+                <form style="text-align: center"  method="post">
+                    <td>
+                        <input type="number" id="amount" name="amount" min="50000" required/> 
+                        <input type="submit" value="Withdraw"/>
+                    </td>
+                </form>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

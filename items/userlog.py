@@ -24,7 +24,7 @@ class Checking(Account):
 class Saving(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self._interestrate=0
+        self._interestrate=0.002 * balance
 
 class Loan(Account):
     def __init__(self,idcost,balance):
@@ -46,6 +46,9 @@ class Customer:
 
     def name(self):
         return self.__nama
+    
+    def __str__(self):
+        return f'ID : {self.__idpengguna}\nNama: {self.__nama}\nAddress : {self.__address}\nPhone : {self.__phone}\nEmail : {self.__email}'
 
 class Admin:
     def __init__(self,nim,namaAdmin,password):

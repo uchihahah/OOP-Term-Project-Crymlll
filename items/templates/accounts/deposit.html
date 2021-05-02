@@ -7,7 +7,6 @@
             <th>CUSTOMERID</th>
             <th>TYPE</th>
             <th>BALANCE</th>
-            <br>
             <th>DEPOSIT</th>
         </tr>
         {% for d in dep %}
@@ -16,11 +15,12 @@
                 <td>{{ d[1] }}</td>
                 <td>{{ d[2] }}</td>
                 <td>{{ d[3] }}</td>
-                <br>
-                <td>
-                    <input type="text" name="amount" required/> 
-                    <input type="submit" value="Deposit"/>
-                </td>
+                <form style="text-align: center"  method="post">
+                    <td>
+                        <input type="number" id="amount" name="amount" min="50000" required/> 
+                        <input type="submit" value="Deposit"/>
+                    </td>
+                </form>
             </tr>
         {% endfor %}
     </table>
