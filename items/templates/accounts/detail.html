@@ -1,26 +1,49 @@
-
-<div class="content">
-    <h1 style="text-align: center">Account Detail</h1>
-    <table>
-        <tr>
-            <th>ACCOUNTID</th>
-            <th>CUSTOMERID</th>
-            <th>TYPE</th>
-            <th>BALANCE</th>
-            <th>DETAILS</th>
-        </tr>
-        {% for d in det %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='details.css')}}">
+</head>
+<body>
+    <div class="content">
+        <h1 style="text-align: center">Account Details</h1>
+        <table id="content-table">
+            <thead>
+                <tr>
+                    <th>ACCOUNTID</th>
+                    <th>CUSTOMERID</th>
+                    <th>TYPE</th>
+                    <th>BALANCE</th>
+                    <th>DETAILS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in det %}
             <tr>
                 <td>{{ d[0] }}</td>
                 <td>{{ d[1] }}</td>
                 <td>{{ d[2] }}</td>
                 <td>{{ d[3] }}</td>
                 <td>
-                    <a href="/accounts/deposit/{{d[0]}}">DEPOSIT</a>
+                    <a href="/accounts/deposit/{{d[0]}}">DEPOSIT</a> <br>
                     <a href="/accounts/withdraw/{{d[0]}}">WITHDRAW</a>   
                 </td>
             </tr>
         {% endfor %}
-    </table>
-    <a>{{all}}</a>
-</div>
+            </tbody>
+        </table>
+    </div>
+    <a class="back" href="/account">
+        <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-undo-6.png" alt="back"
+        width="70" height="70">
+    </a>
+
+    <a class="logout" href="/">
+        <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2013/240/iconmonstr-log-out-2.png" alt="logout"
+        width="70" height="70">
+    </a>
+</body>
+</html>
