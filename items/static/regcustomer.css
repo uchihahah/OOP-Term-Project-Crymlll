@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+}
+html,body{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    background: -webkit-linear-gradient( #4931b3, #18bbd8);
+}
+
+.wrapper{
+    width: 380px;
+    height: 500px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.button{
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px  #3371f7;
+    border-radius: 30px;
+}
+
+.btn-click{
+    padding: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    left: 20px;
+}
+
+#btn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 225px;
+    height: 100%;
+    background: linear-gradient(to right, #4931b3, #18bbd8);
+    border-radius: 30px;
+    transition: .5s;
+}
+
+.input{
+    top: 180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+
+.field {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.login-btn{
+    width: 85%;
+    padding: 10px 30px;
+    position: relative;
+    top: 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #4931b3, #18bbd8);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+#customer{
+    left: 50px;
+}
