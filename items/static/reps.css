@@ -12,16 +12,14 @@ html,body{
 }
 
 .content{
-    width: 500px;
-    height: 500px;
+    width: 1200px;
+    height: 600px;
     position: relative;
     margin: 6% auto;
     background: white;
     padding: 5px;
     overflow: auto;
 }
-
-
 
 #content-table{
     border-collapse: collapse;
@@ -62,6 +60,9 @@ html,body{
 }
 
 .back{
-    position: relative;
-    top: 20px;
+    background-color: #18bbd8;
+}
+
+.logout{
+    background-color: #18bbd8;
 }

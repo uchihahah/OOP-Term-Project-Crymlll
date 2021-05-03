@@ -41,3 +41,12 @@ h2{
     font-size: 10px;
     text-decoration: none;
 }
+
+
+#text-account{
+    position: relative;
+    top: 80px;
+    left: 150px;
+    font-size: 10px;
+    text-decoration: none
+}

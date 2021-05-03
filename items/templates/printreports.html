@@ -1,26 +1,52 @@
-<div class="content">
-    <h1 style="text-align: center">Account</h1>
-    <table>
-        <tr>
-            <th>ACCOUNTID</th>
-            <th>CUSTOMERID</th>
-            <th>ACCOUNT TYPE</th>
-            <th>BALANCE</th>
-            <th>DATETIME</th>
-            <th>TRANSACTION TYPE</th>
-            <th>AMOUNT</th>
-        </tr>
-        {% for printrep in printrepdetail %}
-            <tr>
-                <td>{{ printrep[0] }}</td>
-                <td>{{ printrep[1] }}</td>
-                <td>{{ printrep[2] }}</td>
-                <td>{{ printrep[3] }}</td>
-                <td>{{ printrep[4] }}</td>
-                <td>{{ printrep[5] }}</td>
-                <td>{{ printrep[6] }}</td>
-                <td>{{ printrep[7] }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='reps.css')}}">
+</head>
+<body>
+    <div class="content">
+        <h1 style="text-align: center">Account</h1>
+        <table id="content-table">
+            <thead>
+                <tr>
+                    <th>ACCOUNTID</th>
+                    <th>CUSTOMERID</th>
+                    <th>ACCOUNT TYPE</th>
+                    <th>BALANCE</th>
+                    <th>DATETIME</th>
+                    <th>TRANSACTION TYPE</th>
+                    <th>AMOUNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for printrep in printrepdetail %}
+                    <tr>
+                        <td>{{ printrep[0] }}</td>
+                        <td>{{ printrep[1] }}</td>
+                        <td>{{ printrep[2] }}</td>
+                        <td>{{ printrep[3] }}</td>
+                        <td>{{ printrep[4] }}</td>
+                        <td>{{ printrep[5] }}</td>
+                        <td>{{ printrep[6] }}</td>
+                        <td>{{ printrep[7] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a class="back" href="/menuadmin">
+        <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-undo-6.png" alt="back"
+        width="70" height="70">
+    </a>
+
+    <a class="logout" href="/">
+        <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2013/240/iconmonstr-log-out-2.png" alt="logout"
+        width="70" height="70">
+    </a>
+    
+</body>
+</html>
