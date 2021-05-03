@@ -13,8 +13,11 @@ class Account:
         cur.connection.commit()
         cur.close()
         
-    def withdraw(self):
-        pass
+    def withdraw(self,wits):
+        cur = mysql.connection.cursor()
+        cur.execute(f"update accounts set balance={int(self.__balance - wits)} where accountid='{self.__id}'")
+        cur.connection.commit()
+        cur.close()
 
     def balanceEnquiry(self):
         pass

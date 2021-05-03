@@ -48,6 +48,34 @@ def menu():
     except:
         return "LOGIN FIRST BEFORE CONTINUE"
 
+@app.route('/accounts/register',methods=['GET','POST'])
+def createaccount():
+    if request.method == 'POST':
+        try:
+            if logdata.idcust == "":
+                return "YOU MUST LOGIN FIRST"
+
+            else:
+                accid = request.form['accid']
+                tipe = request.form['tipe']
+
+                cur = mysql.connection.cursor()
+                cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{0})")
+                cur.connection.commit()
+
+                return "ACCOUNT SUKSES DIBUAT"
+        except:
+            return "LOGIN FIRST BEFORE CONTINUE"
+    
+    else:
+        try:
+            if logdata.idcust == "":
+                    return "YOU MUST LOGIN FIRST"
+            else:
+                return render_template('accounts/register.html')
+        except:
+            return "YOU MUST LOGIN FIRST"
+
 @app.route('/accounts',methods=['GET','POST'])
 def accounts():
     try:
@@ -145,18 +173,22 @@ def deposit(id):
             return "You must login first!"
 
 @app.route('/accounts/withdraw/<int:id>', methods=['GET','POST'])
-def withs(id):
+def withdraw(id):
     if request.method == 'POST':
         try:
             if logdata.idcust() == "":
                 return "LOGIN FIRST"
             else:
-                withs = request.form['amount']
+                wits = request.form['amount']
                 cur = mysql.connection.cursor()
-                withs = cur.execute(f"select balance from accounts where accountid='{id}'")
-                withs = cur.fetchall()
+                wd = cur.execute(f"select balance from accounts where accountid='{id}'")
+                wd = cur.fetchall()
 
-                return redirect('/accounts')
+            wits = int(wits)
+            acc.withdraw(wits)
+
+            return redirect('/accounts')
+            
         except:
             return "You must login first!"
     else:

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customer Registration</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='regcustomer.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="button-box">
+                <div class="button">
+                    <div id="btn"></div>
+                    <button type="button" class="btn-click" onclick="customer()">Customer Registration</button>
+                </div>
+                <form id="customer" class="input" method="POST">
+                    <input type="text" class="field" name="accid" placeholder="id" required>
+                    <input type="text" class="field" name="tipe" placeholder="tipe" required>
+                    <input type="submit" class="login-btn" value="INPUT"></button>
+                </form>                
+            </div>
+        </div>
+        
+    </body>
+</html>
