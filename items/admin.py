@@ -86,7 +86,7 @@ def printreport():
 
         else:
             cur = mysql.connection.cursor()
-            printrep = cur.execute('select * from accounttransactions')
+            printrep = cur.execute('select * from accounts natural join accounttransactions')
 
             if printrep > 0:
                 printrepdetail = cur.fetchall()

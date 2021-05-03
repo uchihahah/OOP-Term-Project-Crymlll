@@ -1,9 +1,11 @@
-
 <div class="content">
     <h1 style="text-align: center">Account</h1>
     <table>
         <tr>
             <th>ACCOUNTID</th>
+            <th>CUSTOMERID</th>
+            <th>ACCOUNT TYPE</th>
+            <th>BALANCE</th>
             <th>DATETIME</th>
             <th>TRANSACTION TYPE</th>
             <th>AMOUNT</th>
@@ -14,6 +16,10 @@
                 <td>{{ printrep[1] }}</td>
                 <td>{{ printrep[2] }}</td>
                 <td>{{ printrep[3] }}</td>
+                <td>{{ printrep[4] }}</td>
+                <td>{{ printrep[5] }}</td>
+                <td>{{ printrep[6] }}</td>
+                <td>{{ printrep[7] }}</td>
             </tr>
         {% endfor %}
     </table>
