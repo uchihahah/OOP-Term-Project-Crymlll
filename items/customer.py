@@ -2,6 +2,10 @@ from flask import Flask,render_template,request,redirect,url_for
 from flask_mysqldb import MySQL
 from items import *
 from items.userlog import *
+from datetime import date
+
+global today
+today= date.today()
 
 
 @app.route('/login',methods=['GET','POST'])
@@ -44,7 +48,7 @@ def menu():
             return "LOGIN FIRST BEFORE CONTINUE"
             
         else:
-            return render_template('menu.html')
+            return render_template('menu.html', userlog=logdata.name())
     except:
         return "LOGIN FIRST BEFORE CONTINUE"
 
@@ -84,11 +88,10 @@ def accounts():
         else:
             cur = mysql.connection.cursor()
             accdata = cur.execute(f"select * from accounts where customerid='{loginid}'")
-            userlog=logdata.name()
             
             if accdata > 0:
                 accdatadetail = cur.fetchall()
-                return render_template('accounts.html', accdatadetail=accdatadetail, userlog=userlog)
+                return render_template('accounts.html', accdatadetail=accdatadetail)
 
             else:
                 return "NO DATA ACCOUNT!"
@@ -150,10 +153,16 @@ def deposit(id):
                 cur = mysql.connection.cursor()
                 dep = cur.execute(f"select balance from accounts where accountid='{id}'")
                 dep = cur.fetchall()
+                cur.close()
 
             depo = int(deps)
-
             acc.deposit(depo)
+            
+            day = today.strftime("%Y-%m-%d")
+            print(day)
+            cur = mysql.connection.cursor()
+            cur.execute(f"insert into accounttransactions values ({id},'{day}','Deposit','{depo}')")
+            cur.connection.commit()
 
             return redirect('/accounts')
             
@@ -183,9 +192,15 @@ def withdraw(id):
                 cur = mysql.connection.cursor()
                 wd = cur.execute(f"select balance from accounts where accountid='{id}'")
                 wd = cur.fetchall()
+                cur.close()
 
             wits = int(wits)
             acc.withdraw(wits)
+
+            day = today.strftime("%Y-%m-%d")
+            cur = mysql.connection.cursor()
+            cur.execute(f"insert into accounttransactions values ({id},'{day}','Withdraw','{wits}')")
+            cur.connection.commit()
 
             return redirect('/accounts')
             
