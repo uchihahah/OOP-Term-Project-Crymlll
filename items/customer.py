@@ -40,7 +40,7 @@ def login():
                         
         
     return render_template('login.html')
-
+    
 @app.route('/menu')
 def menu():
     try:
@@ -63,11 +63,16 @@ def createaccount():
                 accid = request.form['accid']
                 tipe = request.form['tipe']
 
-                cur = mysql.connection.cursor()
-                cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{0})")
-                cur.connection.commit()
+                if tipe == "Loan":
+                    cur = mysql.connection.cursor()
+                    cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{1500000})")
+                    cur.connection.commit()
+                else:
+                    cur = mysql.connection.cursor()
+                    cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{0})")
+                    cur.connection.commit()
 
-                return "ACCOUNT SUKSES DIBUAT"
+                return redirect(url_for('accounts'))
         except:
             return "LOGIN FIRST BEFORE CONTINUE"
     
@@ -100,7 +105,7 @@ def accounts():
 
     return render_template('accounts.html')
 
-@app.route('/transactions',methods=['GET','POST'])
+@app.route('/accounts/transactions/',methods=['GET','POST'])
 def transactions():
     try:
         if logdata.idcust() == "":
@@ -112,7 +117,7 @@ def transactions():
 
             if transac > 0:
                 transacdetail = cur.fetchall()
-                return render_template('transactions.html', transacdetail=transacdetail)
+                return render_template('/accounts/transactions.html', transacdetail=transacdetail)
             else:
                 return "TIDAK ADA DATA!!!!"
     except:
@@ -134,13 +139,12 @@ def detail(id):
         if str(det[0][2]) == "Saving":
             acc = Saving(det[0][0],det[0][3])
         elif str(det[0][2]) == "Checking Account":
-            acc = Checking(det[0][9],det[0][3])
+            acc = Checking(det[0][0],det[0][3])
         elif str(det[0][2]) == "Loan":
             acc = Loan(det[0][0],det[0][3])
+        
 
-        print(acc.__dict__)
-
-        return render_template('/accounts/detail.html',id=id, det=det)
+        return render_template('/accounts/detail.html',id=id, det=det, all=acc)
 
 @app.route('/accounts/deposit/<int:id>', methods=['GET','POST'])
 def deposit(id):

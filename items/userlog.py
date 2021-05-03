@@ -25,19 +25,32 @@ class Account:
 class Checking(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self._overdraft=0
+
+        if balance < 0:
+            self.__overdraft = balance
+        else:
+            self.__overdraft=0
+
+    def __str__(self):
+        return (f"This is Checking Account\nOverdraft : {self.__overdraft}")
 
 class Saving(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self._interestrate=0.002 * balance
+        self.__interestrate=0.002 * balance
+
+    def __str__(self):
+        return (f"This is Saving Account\nInterest rate : {self.__interestrate}")
 
 class Loan(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self._principalamount=0
-        self._interestrate=0
-        self._loanduration=0
+        self.__principalamount=0
+        self.__interestrate=0
+        self.__loanduration=0
+
+    def __str__(self):
+        return (f"This is Loan Account\nInterest rate : {self.__interestrate}\nPrincipal Amount : {self.__principalamount}\nLoan Duration : {self.__loanduration}")
 
 class Customer:
     def __init__(self,idpengguna,nama,address,phone,email):
@@ -56,6 +69,8 @@ class Customer:
     def __str__(self):
         return f'ID : {self.__idpengguna}\nNama: {self.__nama}\nAddress : {self.__address}\nPhone : {self.__phone}\nEmail : {self.__email}'
 
+    def __del__(self):
+        return "Sucessfully Logout"
 class Admin:
     def __init__(self,nim,namaAdmin,password):
         self.__nim=nim
