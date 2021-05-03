@@ -1,10 +1,26 @@
-<div class="txt_field">
-    <h1 style="text-align: center">Login</h1>
-    <form style="text-align: center"  method="post">
-        <input type="text" name="ID" required/><label>ID Pengguna</label>
-        <br>
-        <input type="text" name="name" required/><label>Nama Pengguna</label>
-        <br>
-        <input type="submit" value="Login"/>
-    </form>
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="button-box">
+                <div class="button">
+                    <div id="btn"></div>
+                    <button type="button" class="btn-click" onclick="customer()">Customer Login</button>
+                </div>
+                <form id="customer" class="input" method="post">
+                    <input type="text" class="field" name="ID" placeholder="ID" required>
+                    <input type="text" class="field" name="name" placeholder="Name" required>
+                    <input type="submit" class="login-btn" value="Login"></button>
+                </form>                
+            </div>
+        </div>
+        
+    </body>
+</html>
