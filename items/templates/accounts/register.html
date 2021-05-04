@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Customer Registration</title>
-        <link rel="stylesheet" href="{{url_for('static',filename='regcustomer.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='register.css')}}">
         <meta charset="utf-8">
         <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +15,14 @@
                     <button type="button" class="btn-click" onclick="customer()">Customer Registration</button>
                 </div>
                 <form id="customer" class="input" method="POST">
-                    <input type="text" class="field" name="accid" placeholder="id" required>
-                    <input type="text" class="field" name="tipe" placeholder="tipe" required>
+                    <input type="text" class="field" name="accid" placeholder="ID" required>
+                    <br><br>
+                    <select class="opt" name="tipe" id="type" required>
+                        <option value="Loan">Loan Account</option>
+                        <option value="Saving">Saving Account</option>
+                        <option value="Checking Account">Checking Account</option>
+                    </select>
+                    <br><br><br>
                     <input type="submit" class="login-btn" value="INPUT"></button>
                 </form>                
             </div>
