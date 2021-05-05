@@ -20,7 +20,7 @@ class Account:
         cur.close()
 
     def balanceEnquiry(self):
-        pass
+        return self.__balance
 
 class Checking(Account):
     def __init__(self,idcost,balance):
@@ -32,7 +32,7 @@ class Checking(Account):
             self.__overdraft=0
 
     def __str__(self):
-        return (f"This is Checking Account\nOverdraft : {self.__overdraft}")
+        return (f"This is Checking Account, Overdraft : {self.__overdraft}")
 
 class Saving(Account):
     def __init__(self,idcost,balance):
@@ -40,17 +40,17 @@ class Saving(Account):
         self.__interestrate=0.002 * balance
 
     def __str__(self):
-        return (f"This is Saving Account\nInterest rate : {self.__interestrate}")
+        return (f"This is Saving Account, Interest rate : {self.__interestrate}")
 
 class Loan(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self.__principalamount=0
-        self.__interestrate=0
+        self.__principalamount=1500000
+        self.__interestrate=0.01 * balance
         self.__loanduration=0
 
     def __str__(self):
-        return (f"This is Loan Account\nInterest rate : {self.__interestrate}\nPrincipal Amount : {self.__principalamount}\nLoan Duration : {self.__loanduration}")
+        return (f"This is Loan Account, Interest rate : {self.__interestrate}, Principal Amount : {self.__principalamount}, Loan Duration : {self.__loanduration}")
 
 class Customer:
     def __init__(self,idpengguna,nama,address,phone,email):
@@ -71,6 +71,7 @@ class Customer:
 
     def __del__(self):
         return "Sucessfully Logout"
+
 class Admin:
     def __init__(self,nim,namaAdmin,password):
         self.__nim=nim
@@ -79,6 +80,10 @@ class Admin:
 
     def nim(self):
         return self.__nim
+
     def name(self):
         return self.__nama
+        
+    def __del__(self):
+        return "Sucessfully Logout"
 

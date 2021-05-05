@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 from items import *
 from items.userlog import *
 from datetime import date
+import os
 
 global today
 today= date.today()
@@ -45,23 +46,31 @@ def login():
 def menu():
     try:
         if logdata.idcust() == "":
-            return "LOGIN FIRST BEFORE CONTINUE"
+            return redirect('/login')
             
         else:
             return render_template('menu.html', userlog=logdata.name())
     except:
-        return "LOGIN FIRST BEFORE CONTINUE"
+        return redirect('/login')
 
 @app.route('/accounts/register',methods=['GET','POST'])
 def createaccount():
     if request.method == 'POST':
         try:
             if logdata.idcust == "":
-                return "YOU MUST LOGIN FIRST"
+                return redirect('/login')
 
             else:
                 accid = request.form['accid']
                 tipe = request.form['tipe']
+
+                cur = mysql.connection.cursor()
+                cur.execute('select accountid from accounts')
+                idlist= cur.fetchall()
+
+                for i in range(len(idlist)):
+                    if(str(accid) == str(idlist[i][0])):
+                        return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
 
                 if tipe == "Loan":
                     cur = mysql.connection.cursor()
@@ -74,22 +83,22 @@ def createaccount():
 
                 return redirect(url_for('accounts'))
         except:
-            return "LOGIN FIRST BEFORE CONTINUE"
+            return redirect('/login')
     
     else:
         try:
             if logdata.idcust == "":
-                    return "YOU MUST LOGIN FIRST"
+                    return redirect('/login')
             else:
                 return render_template('accounts/register.html')
         except:
-            return "YOU MUST LOGIN FIRST"
+            return redirect('/login')
 
 @app.route('/accounts',methods=['GET','POST'])
 def accounts():
     try:
         if logdata.idcust() == "":
-            return "LOGIN FIRST BEFORE CONTINUE"
+            return redirect('/login')
         else:
             cur = mysql.connection.cursor()
             accdata = cur.execute(f"select * from accounts where customerid='{loginid}'")
@@ -99,9 +108,9 @@ def accounts():
                 return render_template('accounts.html', accdatadetail=accdatadetail)
 
             else:
-                return "NO DATA ACCOUNT!"
+                return render_template('accounts.html')
     except:
-        return "LOGIN FIRST BEFORE CONTINUE"
+        return redirect('/login')
 
     return render_template('accounts.html')
 
@@ -109,7 +118,7 @@ def accounts():
 def transactions():
     try:
         if logdata.idcust() == "":
-            return "LOGIN FIRST BEFORE CONTINUE"
+            return redirect('/login')
             
         else:
             cur = mysql.connection.cursor()
@@ -119,9 +128,9 @@ def transactions():
                 transacdetail = cur.fetchall()
                 return render_template('/accounts/transactions.html', transacdetail=transacdetail)
             else:
-                return "TIDAK ADA DATA!!!!"
+                return render_template('/accounts/transactions.html')
     except:
-        return "LOGIN FIRST BEFORE CONTINUE"
+        return redirect('/login')
 
 
 
@@ -129,7 +138,7 @@ def transactions():
 def detail(id):
     global acc
     if logdata.idcust() == "":
-        return "LOGIN FIRST"
+        return redirect('/login')
     else:
         cur = mysql.connection.cursor()
         det = cur.execute(f"select * from accounts where accountid='{id}'")
@@ -151,7 +160,7 @@ def deposit(id):
     if request.method == 'POST':
         try:
             if logdata.idcust() == "":
-                return "LOGIN FIRST"
+                return redirect('/login')
             else:
                 deps = request.form['amount']
                 cur = mysql.connection.cursor()
@@ -163,7 +172,6 @@ def deposit(id):
             acc.deposit(depo)
             
             day = today.strftime("%Y-%m-%d")
-            print(day)
             cur = mysql.connection.cursor()
             cur.execute(f"insert into accounttransactions values ({id},'{day}','Deposit','{depo}')")
             cur.connection.commit()
@@ -171,11 +179,11 @@ def deposit(id):
             return redirect('/accounts')
             
         except:
-            return "You must login first!"
+            return redirect('/login')
     else:
         try:
             if logdata.idcust() == "":
-                return "LOGIN FIRST"
+                return redirect('/login')
             else:
                 cur = mysql.connection.cursor()
                 dep = cur.execute(f"select * from accounts where accountid='{id}'")
@@ -183,14 +191,14 @@ def deposit(id):
 
                 return render_template('/accounts/deposit.html',id=id, dep=dep)
         except:
-            return "You must login first!"
+            return redirect('/login')
 
 @app.route('/accounts/withdraw/<int:id>', methods=['GET','POST'])
 def withdraw(id):
     if request.method == 'POST':
         try:
             if logdata.idcust() == "":
-                return "LOGIN FIRST"
+                return redirect('/login')
             else:
                 wits = request.form['amount']
                 cur = mysql.connection.cursor()
@@ -199,21 +207,25 @@ def withdraw(id):
                 cur.close()
 
             wits = int(wits)
-            acc.withdraw(wits)
 
-            day = today.strftime("%Y-%m-%d")
-            cur = mysql.connection.cursor()
-            cur.execute(f"insert into accounttransactions values ({id},'{day}','Withdraw','{wits}')")
-            cur.connection.commit()
+            if int(acc.balanceEnquiry() - wits) > 0:
+                acc.withdraw(wits)
 
-            return redirect('/accounts')
+                day = today.strftime("%Y-%m-%d")
+                cur = mysql.connection.cursor()
+                cur.execute(f"insert into accounttransactions values ({id},'{day}','Withdraw','{wits}')")
+                cur.connection.commit()
+
+                return redirect('/accounts')
+            else:
+                return "YOUR BALANCE IS INSUFFICIENT"
             
         except:
-            return "You must login first!"
+            return redirect('/login')
     else:
         try:
             if logdata.idcust() == "":
-                return "LOGIN FIRST"
+                return redirect('/login')
             else:
                 cur = mysql.connection.cursor()
                 wd = cur.execute(f"select * from accounts where accountid='{id}'")
@@ -221,4 +233,4 @@ def withdraw(id):
 
                 return render_template('/accounts/withdraw.html',id=id, wd=wd)
         except:
-            return "You must login first!"
+            return redirect('/login')
