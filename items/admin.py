@@ -98,3 +98,18 @@ def printreport():
         return "You must login first"
     
     return render_template('printreports')
+
+@app.route('/printcustomer')
+def printcustomer():
+    cur = mysql.connection.cursor()
+
+    printrep = cur.execute('select accountid,customerid,type,balance,name from accounts natural join customers')
+
+    if printrep > 0:
+        printrepdetail = cur.fetchall()
+        return render_template('printcustomer.html', printrepdetail=printrepdetail)
+    else:
+        return "TIDAK ADA DATA!!!" 
+    
+    
+    return render_template('printcustomer')

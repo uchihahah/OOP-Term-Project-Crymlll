@@ -134,6 +134,44 @@ def transactions():
 
 
 
+@app.route('/change',methods=['GET'])
+def change():
+    if request.method == "GET":
+        return render_template('change.html')
+
+
+@app.route('/change/email', methods=['GET', 'POST'])
+def changeemail():
+    
+    if request.method == "POST":
+        email = request.form['email']
+        cur = mysql.connection.cursor()
+        cur.execute(f"update customers set email='{email}' where customerid='{loginid}'")
+        cur.connection.commit()
+        cur.close()
+
+        return render_template('/menu.html')
+
+    else:
+        return render_template('/change/email.html')
+
+@app.route('/change/address', methods=['GET', 'POST'])
+def changeaddress():
+    
+    if request.method == "POST":
+        alamat = request.form['address']
+        cur = mysql.connection.cursor()
+        cur.execute(f"update customers set address='{alamat}' where customerid='{loginid}'")
+        cur.connection.commit()
+        cur.close()
+
+        return render_template('/menu.html')
+
+    else:
+        return render_template('/change/address.html')
+
+
+
 @app.route('/accounts/detail/<int:id>', methods=['GET'])
 def detail(id):
     global acc
@@ -234,3 +272,17 @@ def withdraw(id):
                 return render_template('/accounts/withdraw.html',id=id, wd=wd)
         except:
             return redirect('/login')
+
+
+
+@app.route('/delete/transactions')
+def deletetransac():
+
+    cur = mysql.connection.cursor()
+    cur.execute(f"delete from accounttransactions where accountid=(select accountid from accounts where customerid='{loginid}')")
+    cur.connection.commit()
+    cur.close()
+    
+
+    return render_template('/accounts.html')
+        
