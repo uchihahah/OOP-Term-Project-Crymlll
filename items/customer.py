@@ -53,6 +53,20 @@ def menu():
     except:
         return redirect('/login')
 
+@app.route('/customer/info')
+def info():
+    if logdata.idcust() == "":
+        return redirect('/login')
+
+    else:
+        idcust=logdata.idcust()
+        nama= logdata.name()
+        phone=logdata.phone()
+        address=logdata.Address
+        email=logdata.Email
+
+        return render_template('customer/info.html',idcust=idcust,nama=nama,phone=phone,address=address,email=email)
+
 @app.route('/accounts/register',methods=['GET','POST'])
 def createaccount():
     if request.method == 'POST':
@@ -134,13 +148,13 @@ def transactions():
 
 
 
-@app.route('/change',methods=['GET'])
+@app.route('/customer/change',methods=['GET'])
 def change():
     if request.method == "GET":
-        return render_template('change.html')
+        return render_template('customer/change.html')
 
 
-@app.route('/change/email', methods=['GET', 'POST'])
+@app.route('/customer/change/email', methods=['GET', 'POST'])
 def changeemail():
     
     if request.method == "POST":
@@ -150,12 +164,14 @@ def changeemail():
         cur.connection.commit()
         cur.close()
 
-        return render_template('/menu.html')
+        logdata.Email=email
+
+        return render_template('/menu.html',userlog=logdata.name())
 
     else:
-        return render_template('/change/email.html')
+        return render_template('/customer/change/email.html')
 
-@app.route('/change/address', methods=['GET', 'POST'])
+@app.route('/customer/change/address', methods=['GET', 'POST'])
 def changeaddress():
     
     if request.method == "POST":
@@ -165,10 +181,13 @@ def changeaddress():
         cur.connection.commit()
         cur.close()
 
-        return render_template('/menu.html')
+        logdata.Address=alamat
+
+
+        return render_template('/menu.html',userlog=logdata.name())
 
     else:
-        return render_template('/change/address.html')
+        return render_template('/customer/change/address.html')
 
 
 
@@ -279,10 +298,19 @@ def withdraw(id):
 def deletetransac():
 
     cur = mysql.connection.cursor()
-    cur.execute(f"delete from accounttransactions where accountid=(select accountid from accounts where customerid='{loginid}')")
-    cur.connection.commit()
+    cur.execute(f"select accountid from accounts where customerid='{loginid}'")
+    accid=cur.fetchall()
+
+    acco=[]
+    for i in range(len(accid)):
+        acco.append(accid[i][0])
+
+    for i in acco:
+        cur.execute(f"delete from accounttransactions where accountid='{i}'")
+        cur.connection.commit()
+ 
     cur.close()
     
 
-    return render_template('/accounts.html')
+    return render_template('/accounts/transactions.html')
         

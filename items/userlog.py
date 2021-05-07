@@ -66,6 +66,33 @@ class Customer:
     def name(self):
         return self.__nama
     
+    def phone(self):
+        return self.__phone
+
+    @property
+    def Address(self):
+        pass
+
+    @Address.getter
+    def Address(self):
+        return self.__address
+
+    @Address.setter
+    def Address(self,address):
+        self.__address=address
+
+    @property
+    def Email(self):
+        pass
+
+    @Email.getter
+    def Email(self):
+        return self.__email
+
+    @Email.setter
+    def Email(self,email):
+        self.__email=email
+    
     def __str__(self):
         return f'ID : {self.__idpengguna}\nNama: {self.__nama}\nAddress : {self.__address}\nPhone : {self.__phone}\nEmail : {self.__email}'
 

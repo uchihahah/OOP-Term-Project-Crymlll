@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 from flask_mysqldb import MySQL
 from items import *
 from items.userlog import *
@@ -28,22 +28,22 @@ def admin():
                 logadmin=Admin(la[0][0],la[0][1],la[0][2])
                 print(logadmin.__dict__)
 
-                return render_template('menuadmin.html')
+                return redirect('/admin/menu')
         
-    return render_template('admin.html')
+    return render_template('/admin.html')
 
-@app.route('/menuadmin',methods=['GET','POST'])
+@app.route('/admin/menu',methods=['GET','POST'])
 def menuadmin():
     try:
         if logadmin.nim() =="":
             return "Sorry, you must login first"
         else:
-            return render_template('menuadmin.html')
+            return render_template('/admin/menu.html')
     except:
         return "Sorry, you must login first"
 
 
-@app.route('/regcustomer',methods=['GET','POST'])
+@app.route('/admin/regcustomer',methods=['GET','POST'])
 def regcustomer():
     if request.method == 'POST':
         try:
@@ -72,13 +72,12 @@ def regcustomer():
             if logadmin.nim() == "":
                 return "Sorry, you must login first"
             else:
-                return render_template('regcustomer.html')
+                return render_template('/admin/regcustomer.html')
         except:
             return "Sorry, you must login first"
         
-    return render_template('regcustomer.html')
 
-@app.route('/printreports')
+@app.route('/admin/printreports')
 def printreport():
     try:
         if logadmin.nim() == "":
@@ -90,16 +89,15 @@ def printreport():
 
             if printrep > 0:
                 printrepdetail = cur.fetchall()
-                return render_template('printreports.html', printrepdetail=printrepdetail)
+                return render_template('/admin/printreports.html', printrepdetail=printrepdetail)
             else:
                 return "TIDAK ADA DATA!!!" 
     
     except:
         return "You must login first"
     
-    return render_template('printreports')
 
-@app.route('/printcustomer')
+@app.route('/admin/printcustomer')
 def printcustomer():
     cur = mysql.connection.cursor()
 
@@ -107,9 +105,8 @@ def printcustomer():
 
     if printrep > 0:
         printrepdetail = cur.fetchall()
-        return render_template('printcustomer.html', printrepdetail=printrepdetail)
+        return render_template('/admin/printcustomer.html', printrepdetail=printrepdetail)
     else:
         return "TIDAK ADA DATA!!!" 
     
     
-    return render_template('printcustomer')
