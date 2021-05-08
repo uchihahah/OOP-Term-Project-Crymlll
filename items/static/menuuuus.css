@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+}
+html,body{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    background: -webkit-linear-gradient( #4931b3, #18bbd8);
+}
+
+.bar1{
+    font-family: "Gudea", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+a{
+    color: black;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10%;
+    background-color: rgb(0, 0, 0);
+    height: 100px;
+}
+
+.logo{
+    cursor: pointer;
+    position: relative;
+    left: -150px;
+}
+
+.nav_link{
+    list-style: none;
+    position: relative;
+    left: 400px;
+}
+
+.nav_link li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.nav_link li a:hover{
+    color: #18bbd8;
+}
+
+button{
+    padding: 9px 25px;
+    background: -webkit-linear-gradient( #4931b3, #18bbd8);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    left: 100px;
+}
+
+.content{
+    width: 400px;
+    height: 500px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    overflow: hidden;
+}
+
+
+
+h1{
+    position: relative;
+    left: 80px;
+    font-size: 20px;
+}
+
+h2{
+    position: relative;
+    top: 20px;
+    left: 90px;
+    font-size: 15px;
+}
+
+#transaksi{
+    position: relative;
+    top: 30px;
+    left: 110px;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+
+#text-account{
+    position: relative;
+    top: 60px;
+    left: 150px;
+    font-size: 10px;
+    text-align: center;
+    text-decoration: none
+}
+
+#text-account2{
+    position: relative;
+    top: 100px;
+    left: 170px;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none
+}
+
+#account2{
+    position: relative;
+    left: -20px
+}
+
