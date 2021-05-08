@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transactions</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='transactions.css')}}">
+    <title>Account Details</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='details.css')}}">
 </head>
 <body>
     <div class="content">
-        <h1 style="text-align: center">HISTORY</h1>
+        <h1 style="text-align: center">Account Details</h1>
         <table id="content-table">
             <thead>
                 <tr>
                     <th>ACCOUNTID</th>
-                    <th>DATETIME</th>
-                    <th>METHODS</th>
-                    <th>AMOUNT</th>
+                    <th>CUSTOMERID</th>
+                    <th>TYPE</th>
+                    <th>BALANCE</th>
+                    <th>DETAILS</th>
                 </tr>
             </thead>
             <tbody>
-                {% for transac in transacdetail %}
-                    <tr>
-                        <td>{{ transac[0] }}</td>
-                        <td>{{ transac[1] }}</td>
-                        <td>{{ transac[2] }}</td>
-                        <td>{{ transac[3] }}</td>
-                    </tr>
-                {% endfor %}
+                {% for d in det %}
+            <tr>
+                <td>{{ d[0] }}</td>
+                <td>{{ d[1] }}</td>
+                <td>{{ d[2] }}</td>
+                <td>{{ d[3] }}</td>
+                <td>
+                    <a href="/accounts/payment/{{d[0]}}">PAY LOAN</a>
+                </td>
+            </tr>
+        {% endfor %}
             </tbody>
         </table>
+        <a>{{all}}</a>
     </div>
-    <a href="/delete/transactions">CLEAR HISTORY</a>
-    <a class="back" href="/menu">
+    <a class="back" href="/accounts">
         <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-undo-6.png" alt="back"
         width="70" height="70">
     </a>
@@ -41,6 +45,5 @@
         <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2013/240/iconmonstr-log-out-2.png" alt="logout"
         width="70" height="70">
     </a>
-    
 </body>
 </html>

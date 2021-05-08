@@ -32,25 +32,25 @@ class Checking(Account):
             self.__overdraft=0
 
     def __str__(self):
-        return (f"This is Checking Account, Overdraft : {self.__overdraft}")
+        return (f"Checking Account, Overdraft : {self.__overdraft}")
 
 class Saving(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self.__interestrate=0.002 * balance
+        self.__interestrate=0.02 * balance
 
     def __str__(self):
-        return (f"This is Saving Account, Interest rate : {self.__interestrate}")
+        return (f"Saving Account, Interest rate : {self.__interestrate}")
 
 class Loan(Account):
     def __init__(self,idcost,balance):
         super().__init__(idcost,balance)
-        self.__principalamount=1500000
-        self.__interestrate=0.01 * balance
-        self.__loanduration=0
+        self.__principalamount=balance
+        self.__interestrate=0.05 * balance
+        self.__loanduration=12
 
     def __str__(self):
-        return (f"This is Loan Account, Interest rate : {self.__interestrate}, Principal Amount : {self.__principalamount}, Loan Duration : {self.__loanduration}")
+        return (f"Loan Account, Interest rate : {self.__interestrate}, Principal Amount : {self.__principalamount}, Loan Duration : {self.__loanduration} month")
 
 class Customer:
     def __init__(self,idpengguna,nama,address,phone,email):

@@ -69,44 +69,79 @@ def info():
 
 @app.route('/accounts/register',methods=['GET','POST'])
 def createaccount():
-    if request.method == 'POST':
-        try:
-            if logdata.idcust == "":
-                return redirect('/login')
 
-            else:
-                accid = request.form['accid']
-                tipe = request.form['tipe']
+    if request.method == "GET":
+        return render_template('/accounts/register.html')
 
-                cur = mysql.connection.cursor()
-                cur.execute('select accountid from accounts')
-                idlist= cur.fetchall()
+@app.route('/accounts/register/loan', methods=['GET','POST'])
+def accloan():
+    if request.method == "POST":
+        accid = request.form['accid']
+        principalamount = request.form['principalamount']
 
-                for i in range(len(idlist)):
-                    if(str(accid) == str(idlist[i][0])):
-                        return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
+        cur = mysql.connection.cursor()
+        cur.execute('select accountid from accounts')
+        idlist= cur.fetchall()
 
-                if tipe == "Loan":
-                    cur = mysql.connection.cursor()
-                    cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{1500000})")
-                    cur.connection.commit()
-                else:
-                    cur = mysql.connection.cursor()
-                    cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{0})")
-                    cur.connection.commit()
+        for i in range(len(idlist)):
+            if(str(accid) == str(idlist[i][0])):
+                return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
 
-                return redirect(url_for('accounts'))
-        except:
-            return redirect('/login')
+        cur = mysql.connection.cursor()
+        cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','Loan',{principalamount})")
+        cur.connection.commit()
+
+        return redirect(url_for('accounts'))
     
     else:
-        try:
-            if logdata.idcust == "":
-                    return redirect('/login')
-            else:
-                return render_template('accounts/register.html')
-        except:
-            return redirect('/login')
+        return render_template('/accounts/register/loan.html')
+
+
+@app.route('/accounts/register/saving', methods=['GET','POST'])
+def accsaving():
+    if request.method == "POST":
+        accid = request.form['accid']
+
+        cur = mysql.connection.cursor()
+        cur.execute('select accountid from accounts')
+        idlist= cur.fetchall()
+
+        for i in range(len(idlist)):
+            if(str(accid) == str(idlist[i][0])):
+                return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
+
+        cur = mysql.connection.cursor()
+        cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','Saving',{0})")
+        cur.connection.commit()
+
+        return redirect(url_for('accounts'))
+    
+    else:
+        return render_template('/accounts/register/saving.html')
+
+
+@app.route('/accounts/register/checking', methods=['GET','POST'])
+def accchecking():
+    if request.method == "POST":
+        accid = request.form['accid']
+
+        cur = mysql.connection.cursor()
+        cur.execute('select accountid from accounts')
+        idlist= cur.fetchall()
+
+        for i in range(len(idlist)):
+            if(str(accid) == str(idlist[i][0])):
+                return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
+
+        cur = mysql.connection.cursor()
+        cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','Checking Account',{0})")
+        cur.connection.commit()
+
+        return redirect(url_for('accounts'))
+    
+    else:
+        return render_template('/accounts/register/checking.html')
+
 
 @app.route('/accounts',methods=['GET','POST'])
 def accounts():
@@ -150,6 +185,7 @@ def transactions():
 
 @app.route('/customer/change',methods=['GET'])
 def change():
+
     if request.method == "GET":
         return render_template('customer/change.html')
 
@@ -204,13 +240,67 @@ def detail(id):
 
         if str(det[0][2]) == "Saving":
             acc = Saving(det[0][0],det[0][3])
+            return render_template('/accounts/detail/saving.html',id=id, det=det, all=acc)
         elif str(det[0][2]) == "Checking Account":
             acc = Checking(det[0][0],det[0][3])
+            return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc)
         elif str(det[0][2]) == "Loan":
             acc = Loan(det[0][0],det[0][3])
+            return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc)
         
 
         return render_template('/accounts/detail.html',id=id, det=det, all=acc)
+
+@app.route('/accounts/payment/<int:id>', methods=['GET','POST'])
+def payment(id):
+    if request.method == 'POST':
+        try:
+            if logdata.idcust() == "":
+                return redirect('/login')
+            else:
+                payments = request.form['amount']
+                payments = int(payments)
+
+            if int(acc.balanceEnquiry() - payments) > 0:
+                acc.withdraw(payments)
+
+                day = today.strftime("%Y-%m-%d")
+                cur = mysql.connection.cursor()
+                cur.execute(f"insert into accounttransactions values ({id},'{day}','Pay Loan','{payments}')")
+                cur.connection.commit()
+
+                return redirect('/accounts')
+            elif int(acc.balanceEnquiry() - payments) == 0:
+                acc.withdraw(payments)
+
+                day = today.strftime("%Y-%m-%d")
+                cur = mysql.connection.cursor()
+                cur.execute(f"delete from accounttransactions where accountid='{id}'")
+                cur.connection.commit()
+                cur.execute(f"delete from accounts where accountid='{id}'")
+                cur.connection.commit()
+                cur.close()
+
+                return redirect('/accounts')
+
+            else:
+                return "Kebanyakan bayar"
+            
+        except:
+            return redirect('/login')
+    else:
+        try:
+            if logdata.idcust() == "":
+                return redirect('/login')
+            else:
+                cur = mysql.connection.cursor()
+                py = cur.execute(f"select * from accounts where accountid='{id}'")
+                py = cur.fetchall()
+
+                return render_template('/accounts/payment.html',id=id, py=py)
+        except:
+            return redirect('/login')
+
 
 @app.route('/accounts/deposit/<int:id>', methods=['GET','POST'])
 def deposit(id):
