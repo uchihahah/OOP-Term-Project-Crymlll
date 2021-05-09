@@ -67,80 +67,39 @@ def info():
 
         return render_template('customer/info.html',idcust=idcust,nama=nama,phone=phone,address=address,email=email)
 
+
 @app.route('/accounts/register',methods=['GET','POST'])
 def createaccount():
+    if request.method == 'POST':
+        try:
+            if logdata.idcust == "":
+                return redirect('/login')
 
+            else:
+                accid = request.form['accid']
+                tipe = request.form['tipe']
+                amount = request.form['amount']
+                cur = mysql.connection.cursor()
+                cur.execute('select accountid from accounts')
+                idlist= cur.fetchall()
+
+                for i in range(len(idlist)):
+                    if(str(accid) == str(idlist[i][0])):
+                        return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
+
+                if tipe == "Loan":
+                    cur = mysql.connection.cursor()
+                    cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{amount})")
+                    cur.connection.commit()
+                
+
+                return redirect(url_for('accounts'))
+        except:
+            return redirect('/login')
+        
     if request.method == "GET":
         return render_template('/accounts/register.html')
 
-@app.route('/accounts/register/loan', methods=['GET','POST'])
-def accloan():
-    if request.method == "POST":
-        accid = request.form['accid']
-        principalamount = request.form['principalamount']
-
-        cur = mysql.connection.cursor()
-        cur.execute('select accountid from accounts')
-        idlist= cur.fetchall()
-
-        for i in range(len(idlist)):
-            if(str(accid) == str(idlist[i][0])):
-                return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
-
-        cur = mysql.connection.cursor()
-        cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','Loan',{principalamount})")
-        cur.connection.commit()
-
-        return redirect(url_for('accounts'))
-    
-    else:
-        return render_template('/accounts/register/loan.html')
-
-
-@app.route('/accounts/register/saving', methods=['GET','POST'])
-def accsaving():
-    if request.method == "POST":
-        accid = request.form['accid']
-
-        cur = mysql.connection.cursor()
-        cur.execute('select accountid from accounts')
-        idlist= cur.fetchall()
-
-        for i in range(len(idlist)):
-            if(str(accid) == str(idlist[i][0])):
-                return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
-
-        cur = mysql.connection.cursor()
-        cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','Saving',{0})")
-        cur.connection.commit()
-
-        return redirect(url_for('accounts'))
-    
-    else:
-        return render_template('/accounts/register/saving.html')
-
-
-@app.route('/accounts/register/checking', methods=['GET','POST'])
-def accchecking():
-    if request.method == "POST":
-        accid = request.form['accid']
-
-        cur = mysql.connection.cursor()
-        cur.execute('select accountid from accounts')
-        idlist= cur.fetchall()
-
-        for i in range(len(idlist)):
-            if(str(accid) == str(idlist[i][0])):
-                return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
-
-        cur = mysql.connection.cursor()
-        cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','Checking Account',{0})")
-        cur.connection.commit()
-
-        return redirect(url_for('accounts'))
-    
-    else:
-        return render_template('/accounts/register/checking.html')
 
 
 @app.route('/accounts',methods=['GET','POST'])
@@ -237,6 +196,19 @@ def detail(id):
         det = cur.execute(f"select * from accounts where accountid='{id}'")
         det = cur.fetchall()
 
+        cur.execute(f"select count(accountid) from accounttransactions where accountid='{id}'")
+        count = cur.fetchall()
+
+        
+        cur.execute(f"select amount from accounttransactions where accountid='{id}'")
+        ttl=cur.fetchall()
+        
+        total=[]
+        for i in range(len(ttl)):
+            total.append(ttl[i][0])
+        
+        Sum = sum(total)
+        print(Sum)
 
         if str(det[0][2]) == "Saving":
             acc = Saving(det[0][0],det[0][3])
@@ -245,7 +217,7 @@ def detail(id):
             acc = Checking(det[0][0],det[0][3])
             return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc)
         elif str(det[0][2]) == "Loan":
-            acc = Loan(det[0][0],det[0][3])
+            acc = Loan(det[0][0],det[0][3],count[0][0],Sum)
             return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc)
         
 

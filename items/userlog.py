@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 from items import *
 
 class Account:
-    def __init__ (self,idacc,balance):
+    def __init__ (self,idacc,balance,c=None,d=None):
         self.__id=idacc
         self.__balance=balance
     
@@ -43,11 +43,11 @@ class Saving(Account):
         return (f"Saving Account, Interest rate : {self.__interestrate}")
 
 class Loan(Account):
-    def __init__(self,idcost,balance):
+    def __init__(self,idcost,balance,count,Sum):
         super().__init__(idcost,balance)
-        self.__principalamount=balance
+        self.__principalamount= balance+Sum
         self.__interestrate=0.05 * balance
-        self.__loanduration=12
+        self.__loanduration=12 - count
 
     def __str__(self):
         return (f"Loan Account, Interest rate : {self.__interestrate}, Principal Amount : {self.__principalamount}, Loan Duration : {self.__loanduration} month")
