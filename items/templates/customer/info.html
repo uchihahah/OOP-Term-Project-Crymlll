@@ -1,13 +1,43 @@
-<a>Hello, {{ nama }}</a>
-<br>
-<a>IdCustomer : {{ idcust }}</a>
-<br>
-<a>Nama : {{ nama }}</a>
-<br>
-<a>phone : {{ phone }}</a>
-<br>
-<a>Address : {{ address }}</a>
-<br>
-<a>Email : {{ email }}</a>
-<br>
-<a href="/customer/change">CHANGE INFO</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='infoss.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <a class="logo" href=""><img src="https://i.postimg.cc/x8fTTn4T/asdasdadasdasd.png" alt="Logo"
+                width="400px" height="50px"></a>
+            <nav>
+                <ul class="nav_link">
+                    <li><a class="bar1" href="">About Us</a></li>
+                    <li><a class="bar1" href="">Contact</a></li>
+                </ul>
+            </nav>
+            <a class="logout" href="/"><button>Log Out</button></a>
+        </header>
+        <div class="content">
+            <div class="info"> 
+                <a>Hello, {{ nama }}</a>
+                <br>
+                <a>IdCustomer : {{ idcust }}</a>
+                <br>
+                <a>Nama : {{ nama }}</a>
+                <br>
+                <a>phone : {{ phone }}</a>
+                <br>
+                <a>Address : {{ address }}</a>
+                <br>
+                <a>Email : {{ email }}</a>
+                <br><br>
+                <a id="change" href="/customer/change">CHANGE INFO</a>
+            </div>
+        </div>
+        <a id="bck" href="/menu">
+            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-undo-6.png" alt="back"
+            width="70" height="70">
+        </a>
+    </body>

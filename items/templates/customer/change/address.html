@@ -1,6 +1,37 @@
-<h1>GANTI ADDRESS</h1>
-
-<form action="/customer/change/address" method="POST">
-    <input type="text" name="address" required/>
-    <input type="submit"/>
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change Address</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='email.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <a class="logo" href=""><img src="https://i.postimg.cc/x8fTTn4T/asdasdadasdasd.png" alt="Logo"
+                width="400px" height="50px"></a>
+            <nav>
+                <ul class="nav_link">
+                    <li><a class="bar1" href="">About Us</a></li>
+                    <li><a class="bar1" href="">Contact</a></li>
+                </ul>
+            </nav>
+            <a class="logout" href="/"><button>Log Out</button></a>
+        </header>
+        <div class="wrapper">
+            <div class="button-box">
+                <div class="button">
+                    <div id="btn"></div>
+                    <button class="btn-click" >Input Address</button>
+                </div>
+                <form id="customer" action="/customer/change/address" class="input" method="POST">
+                    <input type="text" class="field" name="address" placeholder="New Address" required>
+                    <br> <br><br><br>
+                    <input type="submit" class="login-btn" value="SUBMIT"></button>
+                </form>                
+            </div>
+        </div>
+        
+    </body>
+</html>

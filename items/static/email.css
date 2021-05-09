@@ -7,19 +7,88 @@ html,body{
     display: grid;
     height: 100%;
     width: 100%;
-    place-items: center;
     background: -webkit-linear-gradient( #4931b3, #18bbd8);
 }
 
+.bar1{
+    font-family: "Gudea", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+a{
+    color: black;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10%;
+    background-color: rgb(0, 0, 0);
+    height: 100px;
+}
+
+.logo{
+    cursor: pointer;
+    position: relative;
+    left: -150px;
+}
+
+.nav_link{
+    list-style: none;
+    position: relative;
+    left: 400px;
+}
+
+.nav_link li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_link li a{
+    transition: all 0.3s ease 0s;
+}
+
+.nav_link li a:hover{
+    color: #18bbd8;
+}
+
+button{
+    padding: 9px 25px;
+    background: -webkit-linear-gradient( #4931b3, #18bbd8);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    left: 100px;
+}
+
+#bck{
+    opacity: 0.1;
+    position: relative;
+    left: 950px;
+    top: -50px;
+}
+#bck:hover{
+    opacity: 1.0;
+}
+
+
 .wrapper{
     width: 380px;
-    height: 500px;
+    height: 400px;
     position: relative;
     margin: 6% auto;
     background: white;
     padding: 5px;
     overflow: hidden;
+    top: -100px;
+    font-weight: 800;
 }
+
 
 .button{
     width: 220px;
@@ -36,7 +105,7 @@ html,body{
     border: 0;
     outline: none;
     position: relative;
-    left: 20px;
+    left: 40px;
 }
 
 #btn{
@@ -47,7 +116,7 @@ html,body{
     height: 100%;
     background: linear-gradient(to right, #4931b3, #18bbd8);
     border-radius: 30px;
-    transition: .5s;
+
 }
 
 .input{
@@ -85,13 +154,4 @@ html,body{
 
 #customer{
     left: 50px;
-}
-
-.opt{
-    padding: 8px 12px;
-    color: black;
-    background-color: #eeeeee;
-    border: 1px solid #18bbd8;
-    cursor: pointer;
-    border-radius: 5px;
 }

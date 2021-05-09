@@ -76,50 +76,20 @@ button{
     overflow: hidden;
 }
 
-
-
-h1{
-    position: relative;
-    left: 80px;
-    font-size: 20px;
-}
-
-h2{
-    position: relative;
-    top: 20px;
-    left: 90px;
-    font-size: 15px;
-}
-
-#transaksi{
-    position: relative;
-    top: 30px;
-    left: 110px;
-    font-size: 10px;
-    text-decoration: none;
-}
-
-
-#text-account{
-    position: relative;
-    top: 60px;
-    left: 150px;
-    font-size: 10px;
+.info{
     text-align: center;
-    text-decoration: none
+    line-height: 3;
+    font-weight: 700;
 }
 
-#text-account2{
+#bck{
+    opacity: 0.1;
     position: relative;
-    top: 100px;
-    left: 170px;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none
+    top: -100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-#account2{
-    position: relative;
-    left: -20px
+#bck:hover{
+    opacity: 1.0;
 }
-

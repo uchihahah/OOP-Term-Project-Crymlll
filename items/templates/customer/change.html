@@ -1,7 +1,48 @@
-<div class="content">
-    <h1 style="text-align: center">Lihat</h1>
-    <a href="/customer/change/address">CHANGE ADDRESS</a>
-    <br>
-    <a href="/customer/change/email">CHANGE EMAIL</a>
-    <br>
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Profile</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='changes.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <a class="logo" href=""><img src="https://i.postimg.cc/x8fTTn4T/asdasdadasdasd.png" alt="Logo"
+                width="400px" height="50px"></a>
+            <nav>
+                <ul class="nav_link">
+                    <li><a class="bar1" href="">Menu</a></li>
+                    <li><a class="bar1" href="">About Us</a></li>
+                    <li><a class="bar1" href="">Contact</a></li>
+                </ul>
+            </nav>
+            <a class="logout" href="/"><button>Log Out</button></a>
+        </header>
+        <div class="content">
+            <div class="message">
+                <h2>Edit Profile</h2>
+            </div>   
+            <br>
+            <br>
+            <div class = btn-transaksi>
+                <a id="email" href="/customer/change/email">
+                    <img id="eml" src="https://img.icons8.com/nolan/64/email.png" alt="Deposit"
+                    width="80" height="80"> <br> Change Email <br>
+                </a>
+            </div>
+            <br><br><br><br><br>
+            <div class="phnnmbr">
+                <a id="phone" href="/customer/change/address">
+                    <img id="phn" src="https://img.icons8.com/nolan/64/address.png"
+                     alt="Show Account" width="80" height="80"> <br> <br> Change Address 
+                     
+                </a>
+            </div>
+        </div>
+        <a class="back" href="/customer/info">
+            <img id="bck" src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-undo-6.png" alt="back"
+            width="70" height="70">
+        </a>
+    </body>

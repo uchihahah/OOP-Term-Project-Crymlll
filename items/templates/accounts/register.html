@@ -2,17 +2,28 @@
 <html>
     <head>
         <title>Customer Registration</title>
-        <link rel="stylesheet" href="{{url_for('static',filename='register.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='registers.css')}}">
         <meta charset="utf-8">
         <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <header>
+            <a class="logo" href="/menu"><img src="https://i.postimg.cc/x8fTTn4T/asdasdadasdasd.png" alt="Logo"
+                width="400px" height="50px"></a>
+            <nav>
+                <ul class="nav_link">
+                    <li><a class="bar1" href="">About Us</a></li>
+                    <li><a class="bar1" href="">Contact</a></li>
+                </ul>
+            </nav>
+            <a class="logout" href="/"><button>Log Out</button></a>
+        </header>
         <div class="wrapper">
             <div class="button-box">
                 <div class="button">
                     <div id="btn"></div>
-                    <button type="button" class="btn-click" onclick="customer()">Customer Registration</button>
+                    <button type="button" class="btn-click" onclick="customer()">Account Registration</button>
                 </div>
                 <form id="customer" class="input" method="POST">
                     <input type="text" class="field" name="accid" placeholder="ID" required>
@@ -22,21 +33,16 @@
                         <option value="Saving">Saving Account</option>
                         <option value="Checking Account">Checking Account</option>
                     </select>
-                    <br>
+                    <br><br><br><br>
                     <input type="text" class="field" name="amount" placeholder="Amount" required>
                     <br><br>
                     <input type="submit" class="login-btn" value="INPUT"></button>
                 </form>                
             </div>
         </div>
-        <a class="back" href="/accounts">
+        <a id="bck" href="/accounts">
             <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-undo-6.png" alt="back"
             width="70" height="70">
-        </a>
-    
-        <a class="logout" href="/">
-            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2013/240/iconmonstr-log-out-2.png" alt="logout"
-            width="70" height="70">
-        </a>
+        </a> 
     </body>
 </html>
