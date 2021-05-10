@@ -18,6 +18,7 @@
                     <th>ACCOUNT TYPE</th>
                     <th>BALANCE</th>
                     <th>NAME</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,9 @@
                         <td>{{ printrep[2] }}</td>
                         <td>{{ printrep[3] }}</td>
                         <td>{{ printrep[4] }}</td>
+                        <td>
+                            <a href="/admin/delete/customer/{{printrep[0]}}">DELETE</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

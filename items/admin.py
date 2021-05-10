@@ -110,3 +110,13 @@ def printcustomer():
         return "TIDAK ADA DATA!!!" 
     
     
+@app.route('/admin/delete/customer/<int:id>')
+def delcustomer(id):
+    cur = mysql.connection.cursor()
+    cur.execute(f"delete from accounttransactions where accountid='{id}'")
+    cur.connection.commit()
+    cur.execute(f"delete from accounts where accountid='{id}'")
+    cur.connection.commit()
+    cur.close()
+
+    return redirect('/admin/printcustomer')
