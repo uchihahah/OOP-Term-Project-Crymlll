@@ -2,6 +2,11 @@ from flask import Flask,render_template,request,redirect
 from flask_mysqldb import MySQL
 from items import *
 from items.userlog import *
+from datetime import date
+
+
+global today
+today= date.today()
 
 @app.route('/admin',methods=['GET','POST'])
 def admin():
@@ -120,3 +125,49 @@ def delcustomer(id):
     cur.close()
 
     return redirect('/admin/printcustomer')
+
+
+@app.route('/scheduler')
+def scheduler():
+    cur = mysql.connection.cursor()
+    cur.execute("select * from accounts")
+    accttl=cur.fetchall()
+    print(accttl)
+
+    for i in range(len(accttl)):
+
+        cur = mysql.connection.cursor()
+        cur.execute(f"select count(accountid) from accounttransactions where accountid='{accttl[i][0]}'")
+        count = cur.fetchall()
+
+        
+        cur.execute(f"select amount from accounttransactions where accountid='{accttl[i][0]}'")
+        ttl=cur.fetchall()
+        
+        print(accttl[i][2])
+
+        total=[]
+        for i in range(len(ttl)):
+            total.append(ttl[i][0])
+
+        print(total)
+        
+        Sum = sum(total)
+
+        day = today.strftime("%Y-%m-%d")
+
+
+        if accttl[i][2] == "Loan":
+            print("ada")
+            acc = Loan(accttl[i][0],accttl[0][3],count[0][0],Sum)
+            cur = mysql.connection.cursor()
+            cur.execute(f"update accounts set balance={accttl[0][3] - int(acc.Interest())} where accountid='{accttl[i][0]}'")
+            cur.connection.commit()
+            cur.execute(f"insert into accounttransactions values ('{accttl[i][0]}','{day}','Interest',{accttl[0][3] - int(acc.Interest())})")
+            cur.connection.commit()
+
+
+
+    return redirect('/')
+
+
