@@ -375,4 +375,12 @@ def deletetransac():
     
 
     return render_template('/accounts/transactions.html')
-        
+    
+@app.route('/logout')
+def logout():
+    global logdata
+    try:
+        del logdata
+        return redirect('/')
+    except:
+        return redirect('/')
