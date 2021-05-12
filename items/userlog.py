@@ -49,11 +49,17 @@ class Loan(Account):
     def __init__(self,idcost,balance,count,Sum):
         super().__init__(idcost,balance)
         self.__principalamount= balance+Sum
-        self.__interestrate=0.05 * balance
+        self.__interestrate=0.02 * balance
         self.__loanduration=12 - count
 
     def Interest(self):
         return self.__interestrate
+    
+    def principalamount(self):
+        return self.__principalamount
+
+    def loanduration(self):
+        return self.__loanduration
 
     def __str__(self):
         return (f"Loan Account, Interest rate : {self.__interestrate}, Principal Amount : {self.__principalamount}, Loan Duration : {self.__loanduration} month")

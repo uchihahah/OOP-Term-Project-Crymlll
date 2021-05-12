@@ -1,3 +1,4 @@
+from re import I
 from flask import Flask,render_template,request,redirect
 from flask_mysqldb import MySQL
 from items import *
@@ -129,43 +130,86 @@ def delcustomer(id):
 
 @app.route('/scheduler')
 def scheduler():
+    global accttl
     cur = mysql.connection.cursor()
     cur.execute("select * from accounts")
     accttl=cur.fetchall()
     print(accttl)
+    
+    i=0
 
-    for i in range(len(accttl)):
+    while i in range(len(accttl)):
+        print(i)
+        if accttl[i][2] == "Loan":
+            accloan(i)
 
-        cur = mysql.connection.cursor()
-        cur.execute(f"select count(accountid) from accounttransactions where accountid='{accttl[i][0]}'")
-        count = cur.fetchall()
+        elif accttl[i][2] == "Saving":
+            accsaving(i)
 
-        
-        cur.execute(f"select amount from accounttransactions where accountid='{accttl[i][0]}'")
-        ttl=cur.fetchall()
-        
-        print(accttl[i][2])
+        i+=1
 
-        total=[]
-        for i in range(len(ttl)):
-            total.append(ttl[i][0])
+    return redirect('/')
 
-        print(total)
-        
-        Sum = sum(total)
+def accloan(i):
+
+    cur = mysql.connection.cursor()
+    det = cur.execute(f"select * from accounts where accountid='{accttl[i][0]}'")
+    det = cur.fetchall()
+
+    cur.execute(f"select count(accountid) from accounttransactions where accountid='{accttl[i][0]}'")
+    count = cur.fetchall()
+    cnt=count[0][0]/2
+
+    
+    cur.execute(f"select amount from accounttransactions where accountid='{accttl[i][0]}'")
+    ttl=cur.fetchall()
+    
+    total=[]
+    for j in range(len(ttl)):
+        total.append(ttl[j][0])
+    
+    Sum = sum(total)
+
+    acc = Loan(det[0][0],det[0][3],cnt,Sum)
+
+    payments = (acc.balanceEnquiry()/acc.loanduration())
+
+    if int(acc.balanceEnquiry() - payments) > 0:
+        acc.withdraw(payments)
 
         day = today.strftime("%Y-%m-%d")
+        cur = mysql.connection.cursor()
+        print(accttl)
+        cur.execute(f"insert into accounttransactions values ({accttl[i][0]},'{day}','Pay Loan','{payments}')")
+        cur.connection.commit()
+        cur.execute(f"insert into accounttransactions values ({accttl[i][0]},'{day}','Interest','{acc.Interest()}')")
+        cur.connection.commit()
 
+        return redirect('/accounts')
+        
+    elif int(acc.balanceEnquiry() - payments) == 0:
+        acc.withdraw(payments)
 
-        if accttl[i][2] == "Loan":
-            print("ada")
-            acc = Loan(accttl[i][0],accttl[0][3],count[0][0],Sum)
-            cur = mysql.connection.cursor()
-            cur.execute(f"update accounts set balance={accttl[0][3] - int(acc.Interest())} where accountid='{accttl[i][0]}'")
-            cur.connection.commit()
-            cur.execute(f"insert into accounttransactions values ('{accttl[i][0]}','{day}','Interest',{accttl[0][3] - int(acc.Interest())})")
-            cur.connection.commit()
+        day = today.strftime("%Y-%m-%d")
+        cur = mysql.connection.cursor()
+        cur.execute(f"delete from accounttransactions where accountid='{accttl[i][0]}'")
+        cur.connection.commit()
+        cur.execute(f"delete from accounts where accountid='{accttl[i][0]}'")
+        cur.connection.commit()
+        cur.close()
 
+def accsaving(i):
+    cur = mysql.connection.cursor()
+    det = cur.execute(f"select * from accounts where accountid='{accttl[i][0]}'")
+    det = cur.fetchall()
+
+    acc = Saving(det[0][0],det[0][3])
+
+    cur.execute(f"update accounts set balance={acc.balanceEnquiry() + acc.Interest()} where accountid='{accttl[i][0]}'")
+    cur.connection.commit()
+    day = today.strftime("%Y-%m-%d")
+    cur.execute(f"insert into accounttransactions values ({accttl[i][0]},'{day}','Interest','{acc.Interest()}')")
+    print(det)
 
 
     return redirect('/')

@@ -120,7 +120,6 @@ def accounts():
     except:
         return redirect('/login')
 
-    return render_template('accounts.html')
 
 @app.route('/accounts/transactions/',methods=['GET','POST'])
 def transactions():
@@ -205,7 +204,8 @@ def detail(id):
         
         total=[]
         for i in range(len(ttl)):
-            total.append(ttl[i][0])
+            if i%2==0:
+                total.append(ttl[i][0])
         
         Sum = sum(total)
         print(Sum)
@@ -217,11 +217,9 @@ def detail(id):
             acc = Checking(det[0][0],det[0][3])
             return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc)
         elif str(det[0][2]) == "Loan":
-            acc = Loan(det[0][0],det[0][3],count[0][0],Sum)
+            acc = Loan(det[0][0],det[0][3],int(count[0][0]/2),Sum)
             return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc)
         
-
-        return render_template('/accounts/detail.html',id=id, det=det, all=acc)
 
 @app.route('/accounts/payment/<int:id>', methods=['GET','POST'])
 def payment(id):
@@ -230,8 +228,28 @@ def payment(id):
             if logdata.idcust() == "":
                 return redirect('/login')
             else:
-                payments = request.form['amount']
-                payments = int(payments)
+                cur = mysql.connection.cursor()
+                det = cur.execute(f"select * from accounts where accountid='{id}'")
+                det = cur.fetchall()
+
+                cur.execute(f"select count(accountid) from accounttransactions where accountid='{id}'")
+                count = cur.fetchall()
+                cnt=count[0][0]/2
+
+                
+                cur.execute(f"select amount from accounttransactions where accountid='{id}'")
+                ttl=cur.fetchall()
+                
+                total=[]
+                for i in range(len(ttl)):
+                    total.append(ttl[i][0])
+                
+                Sum = sum(total)
+                print(Sum)
+
+                acc = Loan(det[0][0],det[0][3],cnt,Sum)
+
+                payments = (acc.balanceEnquiry()/acc.loanduration())
 
             if int(acc.balanceEnquiry() - payments) > 0:
                 acc.withdraw(payments)
@@ -240,8 +258,11 @@ def payment(id):
                 cur = mysql.connection.cursor()
                 cur.execute(f"insert into accounttransactions values ({id},'{day}','Pay Loan','{payments}')")
                 cur.connection.commit()
+                cur.execute(f"insert into accounttransactions values ({id},'{day}','Interest','{acc.Interest()}')")
+                cur.connection.commit()
 
                 return redirect('/accounts')
+                
             elif int(acc.balanceEnquiry() - payments) == 0:
                 acc.withdraw(payments)
 
@@ -327,7 +348,7 @@ def withdraw(id):
 
             wits = int(wits)
 
-            if int(acc.balanceEnquiry() - wits) > 0:
+            if int(acc.balanceEnquiry() - wits) > -500000:
                 acc.withdraw(wits)
 
                 day = today.strftime("%Y-%m-%d")
@@ -336,6 +357,7 @@ def withdraw(id):
                 cur.connection.commit()
 
                 return redirect('/accounts')
+
             else:
                 return "YOUR BALANCE IS INSUFFICIENT"
             
