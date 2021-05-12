@@ -15,25 +15,25 @@ def login():
     global loginid
     
     if request.method == 'POST':
-        customer_id = request.form['ID']
-        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
 
         cur = mysql.connection.cursor()
         
-        cur.execute("select customerid from customers")
-        checkid= cur.fetchall()
-        cur.execute("select name from customers")
-        checkname= cur.fetchall()
+        cur.execute("select email from customers")
+        checkemail= cur.fetchall()
+        cur.execute("select password from customers")
+        checkpassword= cur.fetchall()
         cur.close()
 
-        for i in range(len(checkid)):
-            if str(customer_id) == str(checkid[i][0]) and str(name) == str(checkname[i][0]):
+        for i in range(len(checkemail)):
+            if str(email) == str(checkemail[i][0]) and str(password) == str(checkpassword[i][0]):
                 cur = mysql.connection.cursor()
-                cur.execute(f"select * from customers where customerid='{customer_id}'")
+                cur.execute(f"select * from customers where email='{email}'")
                 logon= cur.fetchall()
                 cur.close()
 
-                loginid= customer_id
+                loginid= logon[0][0]
                 logdata = Customer(logon[0][0],logon[0][1],logon[0][2],logon[0][3],logon[0][4])
                 print(logdata.__dict__)
 

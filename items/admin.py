@@ -60,6 +60,7 @@ def regcustomer():
                 address = request.form['address']
                 notelp = request.form['notelp']
                 email = request.form['email']
+                password = request.form['password']
 
                 cur = mysql.connection.cursor()
 
@@ -67,8 +68,9 @@ def regcustomer():
                 print(notelp)
                 print(address)
                 print(email)
+                print(password)
 
-                cur.execute(f"insert into customers values ('{customer_id}','{name}','{address}','{notelp}','{email}')")
+                cur.execute(f"insert into customers values ('{customer_id}','{name}','{address}','{notelp}','{email}','{password}')")
                 mysql.connection.commit()
 
                 cur.close()
