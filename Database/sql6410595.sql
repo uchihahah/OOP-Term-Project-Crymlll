@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.7.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 08:05 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Host: sql6.freesqldatabase.com
+-- Generation Time: May 12, 2021 at 10:09 AM
+-- Server version: 5.5.62-0ubuntu0.14.04.1
+-- PHP Version: 7.0.33-0ubuntu0.16.04.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `crymlllbank`
+-- Database: `sql6410595`
 --
 
 -- --------------------------------------------------------
@@ -39,10 +40,12 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`accountid`, `customerid`, `type`, `balance`) VALUES
-(1, 1, 'Saving', 5000000),
-(2, 2, 'Loan', 10000000),
-(3, 2, 'Checking Account', 7000000),
-(4, 1, 'Loan', 6000000);
+(1, 1, 'Loan', 1000000),
+(2, 2, 'Loan', 3333332),
+(3, 1, 'Saving', 1091400),
+(4, 1, 'Checking Account', 800000),
+(5, 4, 'Saving', 1248480),
+(7, 2, 'Checking Account', 200000);
 
 -- --------------------------------------------------------
 
@@ -54,16 +57,28 @@ CREATE TABLE `accounttransactions` (
   `accountid` int(15) NOT NULL,
   `datetime` date DEFAULT NULL,
   `withdraw` varchar(50) NOT NULL,
-  `ammount` double NOT NULL
+  `amount` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `accounttransactions`
 --
 
-INSERT INTO `accounttransactions` (`accountid`, `datetime`, `withdraw`, `ammount`) VALUES
-(1, '2013-09-01', 'Withdraw', 200000),
-(2, '2013-08-05', 'Deposit', 500000);
+INSERT INTO `accounttransactions` (`accountid`, `datetime`, `withdraw`, `amount`) VALUES
+(1, '2021-05-12', 'Pay Loan', 100000),
+(1, '2021-05-12', 'Interest', 24000),
+(2, '2021-05-12', 'Pay Loan', 333333.3333333333),
+(2, '2021-05-12', 'Interest', 80000),
+(3, '2021-05-12', 'Interest', 20000),
+(3, '2021-05-12', 'Deposit', 50000),
+(4, '2021-05-12', 'Deposit', 350000),
+(4, '2021-05-12', 'Withdraw', 50000),
+(7, '2021-05-12', 'Withdraw', 800000),
+(1, '2021-05-12', 'Pay Loan', 100000),
+(1, '2021-05-12', 'Interest', 22000),
+(2, '2021-05-12', 'Pay Loan', 333333.2727272727),
+(2, '2021-05-12', 'Interest', 73333.32),
+(3, '2021-05-12', 'Interest', 21400);
 
 -- --------------------------------------------------------
 
@@ -96,7 +111,7 @@ CREATE TABLE `customers` (
   `customerid` int(5) NOT NULL,
   `name` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
-  `phone` int(15) NOT NULL,
+  `phone` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -105,9 +120,10 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customerid`, `name`, `address`, `phone`, `email`) VALUES
-(1, 'Mohammed', 'Jakarta', 2147483647, 'mohammed@gmail.com'),
-(2, 'Mustopa', 'Bekasi', 2147483647, 'mustopa@gmail.com'),
-(3, 'Ali', 'Cibinong', 2147483647, 'ali@gmail.com');
+(1, 'Mohammed', 'Cibinong', '2147483647', 'mohammed@gmail.com'),
+(2, 'Mustopa', 'Bekasi', '0214323421', 'mustopa@gmail.com'),
+(3, 'Ali', 'Cibinong', '0843254311', 'alisa@gmail.com'),
+(4, 'Ikura Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com');
 
 --
 -- Indexes for dumped tables

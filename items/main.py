@@ -4,6 +4,7 @@ from items import *
 from items.userlog import *
 from items.admin import *
 from items.customer import *
+from items.bank import *
 
 
 @app.route('/',methods=['GET','POST'])

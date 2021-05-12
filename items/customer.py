@@ -55,17 +55,21 @@ def menu():
 
 @app.route('/customer/info')
 def info():
-    if logdata.idcust() == "":
-        return redirect('/login')
+    try:
+            
+        if logdata.idcust() == "":
+            return redirect('/login')
 
-    else:
-        idcust=logdata.idcust()
-        nama= logdata.name()
-        phone=logdata.phone()
-        address=logdata.Address
-        email=logdata.Email
+        else:
+            idcust=logdata.idcust()
+            nama= logdata.name()
+            phone=logdata.phone()
+            address=logdata.Address
+            email=logdata.Email
 
-        return render_template('customer/info.html',idcust=idcust,nama=nama,phone=phone,address=address,email=email)
+            return render_template('customer/info.html',idcust=idcust,nama=nama,phone=phone,address=address,email=email)
+    except:
+        return redirect('/')
 
 
 @app.route('/accounts/register',methods=['GET','POST'])
@@ -87,10 +91,9 @@ def createaccount():
                     if(str(accid) == str(idlist[i][0])):
                         return "ACCOUNTID NOT AVAILABLE, TRY ANOTHER"
 
-                if tipe == "Loan":
-                    cur = mysql.connection.cursor()
-                    cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{amount})")
-                    cur.connection.commit()
+                cur = mysql.connection.cursor()
+                cur.execute(f"insert into accounts values ({accid},'{logdata.idcust()}','{tipe}',{amount})")
+                cur.connection.commit()
                 
 
                 return redirect(url_for('accounts'))
@@ -143,82 +146,98 @@ def transactions():
 
 @app.route('/customer/change',methods=['GET'])
 def change():
+    try:
 
-    if request.method == "GET":
-        return render_template('customer/change.html')
+        if request.method == "GET":
+            return render_template('customer/change.html')
+
+    except:
+        return redirect('/login')
 
 
 @app.route('/customer/change/email', methods=['GET', 'POST'])
 def changeemail():
-    
-    if request.method == "POST":
-        email = request.form['email']
-        cur = mysql.connection.cursor()
-        cur.execute(f"update customers set email='{email}' where customerid='{loginid}'")
-        cur.connection.commit()
-        cur.close()
+    try:
+        if request.method == "POST":
+            email = request.form['email']
+            cur = mysql.connection.cursor()
+            cur.execute(f"update customers set email='{email}' where customerid='{loginid}'")
+            cur.connection.commit()
+            cur.close()
 
-        logdata.Email=email
+            logdata.Email=email
 
-        return render_template('/menu.html',userlog=logdata.name())
+            return render_template('/menu.html',userlog=logdata.name())
 
-    else:
-        return render_template('/customer/change/email.html')
+        else:
+            return render_template('/customer/change/email.html')
+
+    except:
+        return redirect('/login')
 
 @app.route('/customer/change/address', methods=['GET', 'POST'])
 def changeaddress():
-    
-    if request.method == "POST":
-        alamat = request.form['address']
-        cur = mysql.connection.cursor()
-        cur.execute(f"update customers set address='{alamat}' where customerid='{loginid}'")
-        cur.connection.commit()
-        cur.close()
+    try:
 
-        logdata.Address=alamat
+        if request.method == "POST":
+            alamat = request.form['address']
+            cur = mysql.connection.cursor()
+            cur.execute(f"update customers set address='{alamat}' where customerid='{loginid}'")
+            cur.connection.commit()
+            cur.close()
+
+            logdata.Address=alamat
 
 
-        return render_template('/menu.html',userlog=logdata.name())
+            return render_template('/menu.html',userlog=logdata.name())
 
-    else:
-        return render_template('/customer/change/address.html')
+        else:
+            return render_template('/customer/change/address.html')
+
+    except:
+        return redirect('/login')
 
 
 
 @app.route('/accounts/detail/<int:id>', methods=['GET'])
 def detail(id):
-    global acc
-    if logdata.idcust() == "":
+    try:
+
+        global acc
+        if logdata.idcust() == "":
+            return redirect('/login')
+        else:
+            cur = mysql.connection.cursor()
+            det = cur.execute(f"select * from accounts where accountid='{id}'")
+            det = cur.fetchall()
+
+            cur.execute(f"select count(accountid) from accounttransactions where accountid='{id}'")
+            count = cur.fetchall()
+
+            
+            cur.execute(f"select amount from accounttransactions where accountid='{id}'")
+            ttl=cur.fetchall()
+            
+            total=[]
+            for i in range(len(ttl)):
+                if i%2==0:
+                    total.append(ttl[i][0])
+            
+            Sum = sum(total)
+            print(Sum)
+
+            if str(det[0][2]) == "Saving":
+                acc = Saving(det[0][0],det[0][3])
+                return render_template('/accounts/detail/saving.html',id=id, det=det, all=acc)
+            elif str(det[0][2]) == "Checking Account":
+                acc = Checking(det[0][0],det[0][3])
+                return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc)
+            elif str(det[0][2]) == "Loan":
+                acc = Loan(det[0][0],det[0][3],int(count[0][0]/2),Sum)
+                return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc)
+
+    except:
         return redirect('/login')
-    else:
-        cur = mysql.connection.cursor()
-        det = cur.execute(f"select * from accounts where accountid='{id}'")
-        det = cur.fetchall()
-
-        cur.execute(f"select count(accountid) from accounttransactions where accountid='{id}'")
-        count = cur.fetchall()
-
-        
-        cur.execute(f"select amount from accounttransactions where accountid='{id}'")
-        ttl=cur.fetchall()
-        
-        total=[]
-        for i in range(len(ttl)):
-            if i%2==0:
-                total.append(ttl[i][0])
-        
-        Sum = sum(total)
-        print(Sum)
-
-        if str(det[0][2]) == "Saving":
-            acc = Saving(det[0][0],det[0][3])
-            return render_template('/accounts/detail/saving.html',id=id, det=det, all=acc)
-        elif str(det[0][2]) == "Checking Account":
-            acc = Checking(det[0][0],det[0][3])
-            return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc)
-        elif str(det[0][2]) == "Loan":
-            acc = Loan(det[0][0],det[0][3],int(count[0][0]/2),Sum)
-            return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc)
         
 
 @app.route('/accounts/payment/<int:id>', methods=['GET','POST'])
@@ -380,29 +399,33 @@ def withdraw(id):
 
 @app.route('/delete/transactions')
 def deletetransac():
+    try:
 
-    cur = mysql.connection.cursor()
-    cur.execute(f"select accountid from accounts where customerid='{loginid}'")
-    accid=cur.fetchall()
+        cur = mysql.connection.cursor()
+        cur.execute(f"select accountid from accounts where customerid='{loginid}'")
+        accid=cur.fetchall()
 
-    acco=[]
-    for i in range(len(accid)):
-        acco.append(accid[i][0])
+        acco=[]
+        for i in range(len(accid)):
+            acco.append(accid[i][0])
 
-    for i in acco:
-        cur.execute(f"delete from accounttransactions where accountid='{i}'")
-        cur.connection.commit()
- 
-    cur.close()
+        for i in acco:
+            cur.execute(f"delete from accounttransactions where accountid='{i}'")
+            cur.connection.commit()
     
+        cur.close()
+        
 
-    return render_template('/accounts/transactions.html')
+        return render_template('/accounts/transactions.html')
+    
+    except:
+        return redirect('/login')
     
 @app.route('/logout')
 def logout():
     global logdata
     try:
         del logdata
-        return redirect('/')
+        return redirect('/login')
     except:
-        return redirect('/')
+        return redirect('/login')
