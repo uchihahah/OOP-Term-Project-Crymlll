@@ -1,9 +1,64 @@
-<h1>UCHIHAHAH BANK</h1>
-<a>Nama : Aulia Rahman Zulfi</a><br>
-<a>NIM 119140110</a><br>
-<br>
-<a>Nama : Fadhillah Azhar Alsani</a><br>
-<a>NIM 119140217</a><br>
-<br>
-<a>Nama : Cahya Andy Mareza</a><br>
-<a>NIM 119140007</a><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='abouts.css')}}">
+    <title>About Us</title>
+</head>
+<body>
+    <header>
+        <a class="logo" href="/menu"><img src="https://i.postimg.cc/x8fTTn4T/asdasdadasdasd.png" alt="Logo"
+            width="400px" height="50px"></a>
+        <nav>
+            <ul class="nav_link">
+                <li><a class="bar1" href="/aboutus">About Us</a></li>
+                <li><a class="bar1" href="/faq">FAQ</a></li>
+            </ul>
+        </nav>
+        <a class="logout" href="/"><button>Log Out</button></a>
+    </header>
+<div class="content">
+    <h1>About Us</h1>
+    <div class="group">
+        <div class="member">
+            <div class="imge">
+                <img src="/static/maung.png" alt="maung">
+            </div>
+            <h3>Aulia Rahman Zulfi <br><br> 119140110</h3>
+            <p class="job">Back End Developer</p>
+            <p style="font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Tempora omnis dolorum reiciendis magnam, laudantium tenetur 
+                cupiditate similique! Minima dolorem maiores, 
+                cupiditate autem exercitationem molestias ratione 
+                vel laboriosam officia, labore ipsam.</p>
+        </div>
+        <div class="member">
+            <div class="imge">
+                <img src="/static/andy.png" alt="andy">
+            </div>
+            <h3>Cahya Andy Mareza <br><br>119140007</h3>
+            <p class="job">Jack of All Trades</p>
+            <p style="font-weight: 800;"> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Tempora omnis dolorum reiciendis magnam, laudantium tenetur 
+                cupiditate similique! Minima dolorem maiores, 
+                cupiditate autem exercitationem molestias ratione 
+                vel laboriosam officia, labore ipsam.</p>
+        </div>
+        <div class="member">
+            <div class="imge">
+                <img src="/static/fadhil.png" alt="fadhil">
+            </div>
+            <h3>Fadhillah Azhar Alsani <br><br>119140217</h3>
+            <p class="job">Front End Developer</p>
+            <p style="font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Tempora omnis dolorum reiciendis magnam, laudantium tenetur 
+                cupiditate similique! Minima dolorem maiores, 
+                cupiditate autem exercitationem molestias ratione 
+                vel laboriosam officia, labore ipsam.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
