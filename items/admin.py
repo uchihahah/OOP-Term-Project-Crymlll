@@ -144,4 +144,11 @@ def delcustomer(id):
         return redirect('/admin')
 
 
-
+@app.route('/logoutadmin')
+def logoutadmin():
+    global logadmin
+    try:
+        del logadmin
+        return redirect('/')
+    except:
+        return redirect('/')

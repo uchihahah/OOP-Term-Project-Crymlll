@@ -3,7 +3,6 @@ from flask_mysqldb import MySQL
 from items import *
 from items.userlog import *
 from datetime import date
-import os
 
 global today
 today= date.today()
@@ -426,6 +425,6 @@ def logout():
     global logdata
     try:
         del logdata
-        return redirect('/login')
+        return redirect('/')
     except:
-        return redirect('/login')
+        return redirect('/')
