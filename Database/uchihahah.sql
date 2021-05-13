@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: sql6.freesqldatabase.com
--- Generation Time: May 12, 2021 at 10:09 AM
--- Server version: 5.5.62-0ubuntu0.14.04.1
--- PHP Version: 7.0.33-0ubuntu0.16.04.16
+-- Host: 127.0.0.1
+-- Generation Time: May 13, 2021 at 03:23 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sql6410595`
+-- Database: `uchihahah`
 --
 
 -- --------------------------------------------------------
@@ -112,18 +111,19 @@ CREATE TABLE `customers` (
   `name` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `phone` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `password` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customerid`, `name`, `address`, `phone`, `email`) VALUES
-(1, 'Mohammed', 'Cibinong', '2147483647', 'mohammed@gmail.com'),
-(2, 'Mustopa', 'Bekasi', '0214323421', 'mustopa@gmail.com'),
-(3, 'Ali', 'Cibinong', '0843254311', 'alisa@gmail.com'),
-(4, 'Ikura Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com');
+INSERT INTO `customers` (`customerid`, `name`, `address`, `phone`, `email`, `password`) VALUES
+(1, 'Mohammed', 'Cibinong', '2147483647', 'mohammed@gmail.com', '123456'),
+(2, 'Mustopa', 'Bekasi', '0214323421', 'mustopa@gmail.com', '123456'),
+(3, 'Ali', 'Cibinong', '0843254311', 'alisa@gmail.com', '123456'),
+(4, 'Ikura Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com', '123456');
 
 --
 -- Indexes for dumped tables
