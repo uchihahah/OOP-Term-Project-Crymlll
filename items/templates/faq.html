@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='faq.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='faqs.css')}}">
     <title>FAQ</title>
 </head>
 <body>
@@ -19,24 +19,50 @@
         </nav>
         <a class="logout" href="/logout"><button>Log Out</button></a>
     </header>
-    <div class="box">
+    <div class="box" style="overflow: auto;">
         <p class="heading">Frequently Asked Questions</p>
         <div class="faq">
+            <details>
+                <summary>What is loan interest?</summary>
+                <br>
+                <p class="text">Loan interest is a certain amount of money you need to pay based on your principal amount aside of your
+                    basic loan bills
+                </p>
+            </details>
+            <details>
+                <summary>What is saving interest?</summary>
+                <br>
+                <p class="text">Saving interest is a certain amount of money that will be added to your saving account
+                    each month based on the ballance of your saving account.
+                </p>
+            </details>
+            <details>
+                <summary>What is overdraft?</summary>
+                <br>
+                <p class="text">Overdraft is an extension of credit that allows you to have your checking account
+                    ballance below zero.
+                </p>
+             </details>
            <details>
-              <summary>What is Lorem ipsum?</summary>
+              <summary>How much is the loan interest rate?</summary>
               <br>
-              <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="text">The interest rate of the loan account is 0.02% of the principal amount for each month.</p>
            </details>
            <details>
-              <summary>What is Lorem ipsum?</summary>
+              <summary>How much is the saving interest rate?</summary>
               <br>
-              <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="text">The interest rate of the saving account is 0.02% of the current ballance for each month.</p>
            </details>
            <details>
-              <summary>What is Lorem ipsum?</summary>
+              <summary>How much is the overdraft limit for the checking account?</summary>
               <br>
-              <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="text">The overdraft limit for every checking account is IDR 500,000.</p>
            </details>
+           <details>
+            <summary>Surprise me?</summary>
+            <br> <br>
+            <a href="https://www.youtube.com/watch?v=M5V_IXMewl4" target="_blank">CLICK ME</a>
+         </details>
         </div>
      </div>
 </body>
