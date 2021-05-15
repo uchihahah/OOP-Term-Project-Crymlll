@@ -20,28 +20,28 @@
         <a class="logout" href="/logout"><button>Log Out</button></a>
     </header>
     <div class="content">
-        <h1 style="text-align: center">Customers</h1>
+        <h1 style="text-align: center">Account</h1>
         <table id="content-table">
             <thead>
                 <tr>
+                    <th>ACCOUNTID</th>
                     <th>CUSTOMERID</th>
+                    <th>ACCOUNT TYPE</th>
+                    <th>BALANCE</th>
                     <th>NAME</th>
-                    <th>ADDRESS</th>
-                    <th>PHONE</th>
-                    <th>EMAIL</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
-                {% for print in printcust %}
+                {% for printrep in printrepdetail %}
                     <tr>
-                        <td>{{ print[0] }}</td>
-                        <td>{{ print[1] }}</td>
-                        <td>{{ print[2] }}</td>
-                        <td>{{ print[3] }}</td>
-                        <td>{{ print[4] }}</td>
+                        <td>{{ printrep[0] }}</td>
+                        <td>{{ printrep[1] }}</td>
+                        <td>{{ printrep[2] }}</td>
+                        <td>{{ printrep[3] }}</td>
+                        <td>{{ printrep[4] }}</td>
                         <td>
-                            <a href="/admin/delete/customers/{{print[0]}}">DELETE</a>
+                            <a href="/admin/delete/accounts/{{printrep[0]}}">DELETE</a>
                         </td>
                     </tr>
                 {% endfor %}

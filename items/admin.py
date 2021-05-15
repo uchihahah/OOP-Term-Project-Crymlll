@@ -109,40 +109,80 @@ def printreport():
         return redirect('/admin')
     
 
-@app.route('/admin/printcustomer')
+@app.route('/admin/printaccounts')
+def printaccounts():
+    try:
+        if logadmin.nim() == "":
+            return redirect('/admin')
+        else:
+            cur = mysql.connection.cursor()
+
+            printrep = cur.execute('select accountid,customerid,type,balance,name from accounts natural join customers')
+
+            if printrep > 0:
+                printrepdetail = cur.fetchall()
+                return render_template('/admin/printaccounts.html', printrepdetail=printrepdetail)
+            else:
+                return "DATA NOT FOUND!!!" 
+    
+    except:
+        return redirect('/admin')
+    
+    
+@app.route('/admin/delete/accounts/<int:id>')
+def delaccounts(id):
+    try:
+        if logadmin.nim() == "":
+            return redirect('/admin')
+        else:
+
+            cur = mysql.connection.cursor()
+            cur.execute(f"delete from accounttransactions where accountid='{id}'")
+            cur.connection.commit()
+            cur.execute(f"delete from accounts where accountid='{id}'")
+            cur.connection.commit()
+            cur.close()
+
+            return redirect('/admin/printaccounts')
+    
+    except:
+        return redirect('/admin')
+
+@app.route('/admin/printcustomers')
 def printcustomer():
     try:
-
-        cur = mysql.connection.cursor()
-
-        printrep = cur.execute('select accountid,customerid,type,balance,name from accounts natural join customers')
-
-        if printrep > 0:
-            printrepdetail = cur.fetchall()
-            return render_template('/admin/printcustomer.html', printrepdetail=printrepdetail)
+        if logadmin.nim() == "":
+            return redirect('/admin')
         else:
-            return "DATA NOT FOUND!!!" 
-    
+            cur = mysql.connection.cursor()
+            cur.execute("select customerid,name,address,phone,email from customers")
+            printcust = cur.fetchall()
+            print(printcust)
+
+            return render_template('/admin/printcustomer.html', printcust=printcust)
+
     except:
         return redirect('/admin')
-    
-    
-@app.route('/admin/delete/customer/<int:id>')
-def delcustomer(id):
+
+@app.route('/admin/delete/customers/<int:id>')
+def delcustomers(id):
     try:
+        if logadmin.nim() == "":
+            return redirect('/admin')
+        else:
+            try:
 
-        cur = mysql.connection.cursor()
-        cur.execute(f"delete from accounttransactions where accountid='{id}'")
-        cur.connection.commit()
-        cur.execute(f"delete from accounts where accountid='{id}'")
-        cur.connection.commit()
-        cur.close()
+                cur = mysql.connection.cursor()
+                cur.execute(f"delete from customers where customerid='{id}'")
+                cur.connection.commit()
+                return redirect('/admin/printcustomers')
 
-        return redirect('/admin/printcustomer')
-    
+            except:
+
+                return f"Customer id = {id} still have active accounts"    
+
     except:
         return redirect('/admin')
-
 
 @app.route('/logoutadmin')
 def logoutadmin():
