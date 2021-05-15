@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
-
 *{
     margin: 0;
     padding: 0;
@@ -82,62 +80,43 @@ button{
     opacity: 1.0;
 }
 
-.content{
-    margin-top: 10%;
+.box{
+   width: 500px;
+   height: 600px;
+   margin: 100px auto;
+   position: relative;
+   background: #fff;
 }
 
-.content h1{
-    margin-top: -200px;
-    font-size: 52px;
-    margin-bottom: 150px;
-    text-align: center;
+.box .heading{
+   background: black;
+   padding: 20px;
+   color: #fff;
+   text-align: center;
+   font-size: 25px;
 }
 
-.group{
-    display: flex;
-    text-align: center;
-    width: auto;
-    justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
+.faq{
+   padding: 0px 20px 20px;
 }
 
-.group .member{
-    background: #fff;
-    margin: 5px;
-    margin-bottom: 50px;
-    width: 400px;
-    padding: 20px;
-    line-height: 20px;
-    position: relative;
+
+details{
+   background: -webkit-linear-gradient( #4931b3, #18bbd8);;
+   padding: 10px 20px;
+   border-radius: 7px;
+   margin-top: 30px;
+   font-family: "Rubik";
+   font-size: 14px;
+   letter-spacing: 1px;
+   cursor: pointer;
 }
 
-.group .member h3{
-    font-size: 26px;
-    margin-top: 50px;
+details summary{
+   outline: none;
+   font-weight: 500;
+   font-size: 16px;
 }
 
-.group .member p.job{
-    font-size: 16px;
-    font-weight: 1000;
-    text-transform: uppercase;
-    margin: 12px 0px;
-}
 
-.group .member .imge{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translate(-50%);
-    background-color: #fff;
-}
 
-.group .member .imge img{
-    width: 150px;
-    height: 150px;
-    padding: 10px;
-
-}

@@ -1,1 +1,43 @@
-<h1>INFORMATION ABOUT BANK</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='faq.css')}}">
+    <title>FAQ</title>
+</head>
+<body>
+    <header>
+        <a class="logo" href="/menu"><img src="https://i.postimg.cc/1zxKyBCC/logos.png" alt="Logo"
+            width="500px" height="70px"></a>
+        <nav>
+            <ul class="nav_link">
+                <li><a class="bar1" href="/aboutus">About Us</a></li>
+                <li><a class="bar1" href="/faq">FAQ</a></li>
+            </ul>
+        </nav>
+        <a class="logout" href="/logout"><button>Log Out</button></a>
+    </header>
+    <div class="box">
+        <p class="heading">Frequently Asked Questions</p>
+        <div class="faq">
+           <details>
+              <summary>What is Lorem ipsum?</summary>
+              <br>
+              <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+           </details>
+           <details>
+              <summary>What is Lorem ipsum?</summary>
+              <br>
+              <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+           </details>
+           <details>
+              <summary>What is Lorem ipsum?</summary>
+              <br>
+              <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+           </details>
+        </div>
+     </div>
+</body>
+</html>
