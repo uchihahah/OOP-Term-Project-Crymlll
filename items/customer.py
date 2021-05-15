@@ -75,7 +75,7 @@ def info():
 def createaccount():
     if request.method == 'POST':
         try:
-            if logdata.idcust == "":
+            if logdata.idcust() == "":
                 return redirect('/login')
 
             else:
@@ -100,7 +100,15 @@ def createaccount():
             return redirect('/login')
         
     if request.method == "GET":
-        return render_template('/accounts/register.html')
+        try:    
+
+            if logdata.idcust() == "":
+                    return redirect('/login')
+            else:
+                    
+                return render_template('/accounts/register.html')
+        except:
+            return redirect('/login')
 
 
 
@@ -146,9 +154,12 @@ def transactions():
 @app.route('/customer/change',methods=['GET'])
 def change():
     try:
+        if logdata.idcust() == "":
+            return redirect('/login')
+        else:
 
-        if request.method == "GET":
-            return render_template('customer/change.html')
+            if request.method == "GET":
+                return render_template('customer/change.html')
 
     except:
         return redirect('/login')
@@ -157,19 +168,22 @@ def change():
 @app.route('/customer/change/email', methods=['GET', 'POST'])
 def changeemail():
     try:
-        if request.method == "POST":
-            email = request.form['email']
-            cur = mysql.connection.cursor()
-            cur.execute(f"update customers set email='{email}' where customerid='{loginid}'")
-            cur.connection.commit()
-            cur.close()
+        if logdata.idcust() == "":
+            return redirect('/login')
+        else:      
+            if request.method == "POST":
+                email = request.form['email']
+                cur = mysql.connection.cursor()
+                cur.execute(f"update customers set email='{email}' where customerid='{loginid}'")
+                cur.connection.commit()
+                cur.close()
 
-            logdata.Email=email
+                logdata.Email=email
 
-            return render_template('/menu.html',userlog=logdata.name())
+                return render_template('/menu.html',userlog=logdata.name())
 
-        else:
-            return render_template('/customer/change/email.html')
+            else:
+                return render_template('/customer/change/email.html')
 
     except:
         return redirect('/login')
@@ -177,21 +191,24 @@ def changeemail():
 @app.route('/customer/change/address', methods=['GET', 'POST'])
 def changeaddress():
     try:
-
-        if request.method == "POST":
-            alamat = request.form['address']
-            cur = mysql.connection.cursor()
-            cur.execute(f"update customers set address='{alamat}' where customerid='{loginid}'")
-            cur.connection.commit()
-            cur.close()
-
-            logdata.Address=alamat
-
-
-            return render_template('/menu.html',userlog=logdata.name())
-
+        if logdata.idcust() == "":
+            return redirect('/login')
         else:
-            return render_template('/customer/change/address.html')
+            
+            if request.method == "POST":
+                alamat = request.form['address']
+                cur = mysql.connection.cursor()
+                cur.execute(f"update customers set address='{alamat}' where customerid='{loginid}'")
+                cur.connection.commit()
+                cur.close()
+
+                logdata.Address=alamat
+
+
+                return render_template('/menu.html',userlog=logdata.name())
+
+            else:
+                return render_template('/customer/change/address.html')
 
     except:
         return redirect('/login')
@@ -317,8 +334,10 @@ def payment(id):
 def deposit(id):
     if request.method == 'POST':
         try:
+
             if logdata.idcust() == "":
                 return redirect('/login')
+
             else:
                 deps = request.form['amount']
                 cur = mysql.connection.cursor()
@@ -366,7 +385,7 @@ def withdraw(id):
 
             wits = int(wits)
 
-            if int(acc.balanceEnquiry() - wits) > -500000:
+            if int(acc.balanceEnquiry() - wits) > - 500000:
                 acc.withdraw(wits)
 
                 day = today.strftime("%Y-%m-%d")
@@ -400,20 +419,25 @@ def withdraw(id):
 def deletetransac():
     try:
 
-        cur = mysql.connection.cursor()
-        cur.execute(f"select accountid from accounts where customerid='{loginid}'")
-        accid=cur.fetchall()
+        if logdata.idcust() == "":
+            return redirect('/login')
 
-        acco=[]
-        for i in range(len(accid)):
-            acco.append(accid[i][0])
+        else:
 
-        for i in acco:
-            cur.execute(f"delete from accounttransactions where accountid='{i}'")
-            cur.connection.commit()
-    
-        cur.close()
+            cur = mysql.connection.cursor()
+            cur.execute(f"select accountid from accounts where customerid='{loginid}'")
+            accid=cur.fetchall()
+
+            acco=[]
+            for i in range(len(accid)):
+                acco.append(accid[i][0])
+
+            for i in acco:
+                cur.execute(f"delete from accounttransactions where accountid='{i}'")
+                cur.connection.commit()
         
+            cur.close()
+            
 
         return render_template('/accounts/transactions.html')
     
