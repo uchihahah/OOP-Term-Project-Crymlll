@@ -139,7 +139,7 @@ def transactions():
             
         else:
             cur = mysql.connection.cursor()
-            transac = cur.execute(f"select * from accounttransactions where accountid in (select accountid from accounts where customerid='{loginid}')")
+            transac = cur.execute(f"select * from accounttransactions where accountid in (select accountid from accounts where customerid='{loginid}') order by date(datetime)")
 
             if transac > 0:
                 transacdetail = cur.fetchall()
