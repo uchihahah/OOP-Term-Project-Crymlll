@@ -19,6 +19,7 @@ Aplikasi yang dibutuhkan:
 3. Browser
 
 Untuk mendownload Modul yang dibutuhkan dalam menjalankan app ini, ketikkan sintaks berikut pada terminal: 
+
 **pip install -r requirements.txt**
 
 Cara Masukkan database pada MYSQL:
@@ -31,5 +32,5 @@ Cara Masukkan database pada MYSQL:
 7. Klik Go
 8. Done
 
-Untuk menjalankan program, jalankan file **app.py** atau ketik **python app.py**
+Untuk menjalankan program, jalankan file **app.py** atau ketik **python app.py**, 
 Setelah itu buka **localhost:5000** pada browser kesayangan anda.
