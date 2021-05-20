@@ -295,6 +295,7 @@ def payment(id):
                 cur.execute(f"insert into accounttransactions values ({id},'{day}','Interest','{acc.Interest()}')")
                 cur.connection.commit()
 
+                time.sleep(2)
                 return redirect('/accounts')
                 
             elif int(acc.balanceEnquiry() - payments) == 0:
@@ -308,6 +309,7 @@ def payment(id):
                 cur.connection.commit()
                 cur.close()
 
+                time.sleep(2)
                 return redirect('/accounts')
 
             else:

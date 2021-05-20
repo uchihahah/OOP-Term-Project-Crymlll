@@ -1,6 +1,6 @@
 # OOP-Term-Project-Bank-Management-System
 
-PBO RB 
+Pemrograman Berorientasi Objeck , Kelas RB 
 
 Nama Kelompok : Uchihahaha
 
@@ -20,10 +20,11 @@ Untuk menjalankan Aplikasi ini dibutuhkan:
 3. Browser / Chrome
 4. Koneksi Internet
 
-Aplikasi ini menggunakan framework flask sehingga untuk menjalankannya dibutuhkan modul flask dan flask_mysqldb.
+Aplikasi ini menggunakan **framework flask** dan database MYSQL, sehingga untuk menjalankannya dibutuhkan modul flask dan flask_mysqldb.
+List modul yang digunakan terdapat didalam file **requirements.txt**.
 Untuk mendownload **semua modul** yang dibutuhkan dalam menjalankan app ini, ketikkan sintak berikut pada terminal: 
 
-> **pip install -r requirements.txt**
+     **pip install -r requirements.txt**
 
 
 Cara import database pada MYSQL:
