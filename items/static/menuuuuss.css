@@ -29,6 +29,7 @@ header{
     padding: 0px 10%;
     background-color: rgb(0, 0, 0);
     height: 100px;
+    box-shadow: 0 0 10px black;
 }
 
 .logo{
@@ -76,6 +77,7 @@ header button{
     padding: 5px;
     overflow: hidden;
     border-radius: 10px;
+    
 }
 
 .content{

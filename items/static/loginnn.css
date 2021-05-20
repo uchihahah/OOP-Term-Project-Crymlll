@@ -29,6 +29,7 @@ header{
     padding: 0px 10%;
     background-color: rgb(0, 0, 0);
     height: 100px;
+    box-shadow: 0 0 10px black;
 }
 
 .logo{
@@ -134,6 +135,7 @@ button{
     border: 0;
     outline: none;
     border-radius: 2px;
+    
 }
 
 #customer{

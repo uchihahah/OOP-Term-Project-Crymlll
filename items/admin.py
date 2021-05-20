@@ -97,7 +97,7 @@ def printreport():
 
         else:
             cur = mysql.connection.cursor()
-            printrep = cur.execute('select * from accounts natural join accounttransactions order by date(datetime)')
+            printrep = cur.execute('select * from accounts natural join accounttransactions order by date(datetime) desc')
 
             if printrep > 0:
                 printrepdetail = cur.fetchall()

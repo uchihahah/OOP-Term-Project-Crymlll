@@ -13,16 +13,20 @@ Anggota :
  
 BANK MANAGEMENT SYSTEM
 
-Aplikasi yang dibutuhkan:
-1. XAMPP
-2. IDE python / VSCode
-3. Browser
+Untuk menjalankan Aplikasi ini dibutuhkan:
+1. XAMPP - https://www.apachefriends.org/download.html
+2. IDE python / VSCode - https://code.visualstudio.com/download
+3. Python - https://www.python.org/downloads/
+3. Browser / Chrome
+4. Koneksi Internet
 
-Untuk mendownload Modul yang dibutuhkan dalam menjalankan app ini, ketikkan sintaks berikut pada terminal: 
+Aplikasi ini menggunakan framework flask sehingga untuk menjalankannya dibutuhkan modul flask dan flask_mysqldb.
+Untuk mendownload **semua modul** yang dibutuhkan dalam menjalankan app ini, ketikkan sintak berikut pada terminal: 
 
-**pip install -r requirements.txt**
+> **pip install -r requirements.txt**
 
-Cara Masukkan database pada MYSQL:
+
+Cara import database pada MYSQL:
 1. Install Xampp terlebih dahulu pada link: https://www.apachefriends.org/download.html
 2. Start Module Apache dan MySQL
 3. Masuk localhost http://localhost/phpmyadmin/
@@ -32,5 +36,5 @@ Cara Masukkan database pada MYSQL:
 7. Klik Go
 8. Done
 
-Untuk menjalankan program, jalankan file **app.py** atau ketik **python app.py**, 
+Untuk menjalankan program, jalankan file **app.py** atau ketikkan **python app.py** pada terminal, 
 Setelah itu buka **localhost:5000** pada browser kesayangan anda.

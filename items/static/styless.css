@@ -29,6 +29,7 @@ a{
     padding: 0px 10%;
     background-color: rgb(0, 0, 0);
     height: 100px;
+    box-shadow: 0 0 10px black;
 }
 
 .logo{
@@ -77,6 +78,7 @@ button{
     overflow: hidden;
     border-radius: 5px;
     text-align: center;
+    box-shadow: 0 0 10px black;
 }
 
 .wrapper{
