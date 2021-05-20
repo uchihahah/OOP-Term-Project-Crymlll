@@ -57,7 +57,7 @@ header{
     color: #18bbd8;
 }
 
-button{
+header button{
     padding: 9px 25px;
     background: -webkit-linear-gradient( #4931b3, #18bbd8);
     border: none;
@@ -67,22 +67,63 @@ button{
     left: 100px;
 }
 
-.content{
-    width: 400px;
+.wrapper{
+    text-decoration: none;
+    width: 600px;
     height: 500px;
     position: relative;
-    margin: 6% auto;
+    margin: 100px auto;
+    background: ghostwhite;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 7px;
+    box-shadow: 0 0 10px gray;
+    
+}
+
+.content{
+    width: 400px;
+    height: 100px;
+    position: relative;
+    margin: 100px auto;
     background: white;
     padding: 5px;
     overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+
 }
 
+.content img{
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
 
-
+.content p{
+    position: relative;
+    top: 8px;
+}
 h2{
     position: relative;
     text-align: center;
     font-size: 20px;
+    font-weight: 500;
+    top: 20px;
+}
+
+.content .txt{
+    position: relative;
+    top: -50px;
+    left: 120px;
+}
+
+.content:hover{
+    transform: scale(1.05);
+    transition: all .5s;
+    z-index: 100;
+    box-shadow: 0 0 10px black;
 }
 
 #bck{
@@ -95,21 +136,4 @@ h2{
 }
 #bck:hover{
     opacity: 1.0;
-}
-
-#email{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    text-align: center;
-}
-
-
-#phone{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    text-align: center;
 }

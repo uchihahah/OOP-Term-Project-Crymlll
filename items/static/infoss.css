@@ -74,7 +74,9 @@ button{
     margin: 6% auto;
     background: white;
     padding: 5px;
-    overflow: hidden;
+    overflow: auto;
+    border-radius: 7px;
+    box-shadow: 0 0 10px gray;
 }
 
 .info{

@@ -79,6 +79,7 @@ button{
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 0 10px black;
+    cursor: pointer;
 }
 
 .wrapper{
@@ -100,5 +101,5 @@ button{
     transform: scale(1.05);
     transition: all .5s;
     z-index: 100;
-    box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 10px black;
 }

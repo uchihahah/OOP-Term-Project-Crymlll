@@ -93,6 +93,8 @@ button{
     background: white;
     padding: 5px;
     overflow: hidden;
+    border-radius: 7px;
+    box-shadow: 0 0 10px gray;
 }
 
 .button{
@@ -151,12 +153,17 @@ button{
     cursor: pointer;
     display: block;
     margin: auto;
-    background: linear-gradient(to right, #4931b3, #18bbd8);
+    background-color:rgb(41, 119, 223);
     border: 0;
     outline: none;
-    border-radius: 30px;
+    border-radius: 2px;
 }
 
 #customer{
     left: 50px;
+}
+
+.button-box{
+    position: relative;
+    top: -100px;
 }

@@ -67,29 +67,30 @@ button{
     left: 100px;
 }
 
+
 #bck{
     opacity: 0.1;
     position: relative;
-    left: 950px;
-    top: -50px;
+    top: -100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 #bck:hover{
     opacity: 1.0;
 }
 
-
 .wrapper{
     width: 380px;
-    height: 400px;
+    height: 500px;
     position: relative;
     margin: 6% auto;
     background: white;
     padding: 5px;
     overflow: hidden;
-    top: -100px;
-    font-weight: 800;
+    border-radius: 7px;
+    box-shadow: 0 0 10px  gray;
 }
-
 
 .button{
     width: 220px;
@@ -106,7 +107,7 @@ button{
     border: 0;
     outline: none;
     position: relative;
-    left: 40px;
+    left: 20px;
 }
 
 #btn{
@@ -117,7 +118,7 @@ button{
     height: 100%;
     background: linear-gradient(to right, #4931b3, #18bbd8);
     border-radius: 30px;
-
+    transition: .5s;
 }
 
 .input{
@@ -147,12 +148,21 @@ button{
     cursor: pointer;
     display: block;
     margin: auto;
-    background: linear-gradient(to right, #4931b3, #18bbd8);
+    background-color:rgb(41, 119, 223);
     border: 0;
     outline: none;
-    border-radius: 30px;
+    border-radius: 2px;
 }
 
 #customer{
     left: 50px;
+}
+
+.opt{
+    padding: 8px 12px;
+    color: black;
+    background-color: #eeeeee;
+    border: 1px solid #18bbd8;
+    cursor: pointer;
+    border-radius: 5px;
 }
