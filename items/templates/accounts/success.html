@@ -1,13 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <style>
+        .btn {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body style="font-family: sans-serif; ">
+<div style="height: 500px;">
 
-<div class="content">
-    <h1 style="text-align: center">TEST</h1>
-    <table>
-        <tr>
-            <th>ACCOUNTID</th>
-            <th>CUSTOMERID</th>
-            <th>TYPE</th>
-            <th>BALANCE</th>
-            <th>DEPOSIT</th>
-        </tr>
-    </table>
+    <div class="btn"><button onclick="showSuccessAlert()">Show success</button></div>
+    <div class="btn"><button onclick="fireInfoAlert()">Show info</button></div>
+    <div class="btn"><button onclick="showError()">Show error</button></div>
+    <div class="btn"><button onclick="showMessage()">Show message</button></div>
+    <div class="btn"><button onclick="showAlertTopEnd()">Show alert in top right corner</button></div>
+    <div class="btn"><button onclick="showDialogWithPassingParams()">Show dialog with second alert on yes</button></div>
+
 </div>
+<script>
+
+    function showSuccessAlert() {
+        Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+        )
+    }
+
+    function fireInfoAlert() {
+        Swal.fire({
+            icon: 'info',
+            title: 'Info',
+            text: 'You clicked the button!'
+        })
+    }
+
+    function showError() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+        })
+    }
+
+    function showMessage() {
+        Swal.fire('Simple message')
+    }
+
+    function showAlertTopEnd() {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Display this alert in top right corner',
+            showConfirmButton: false,
+            timer: 2500
+        })
+    }
+
+    function showDialogWithPassingParams() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

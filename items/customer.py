@@ -2,10 +2,8 @@ from flask import Flask,render_template,request,redirect,url_for
 from flask_mysqldb import MySQL
 from items import *
 from items.userlog import *
-from datetime import date
-
-global today
-today= date.today()
+import datetime
+import time
 
 
 @app.route('/login',methods=['GET','POST'])
@@ -239,6 +237,7 @@ def detail(id):
                 if i%2==0:
                     total.append(ttl[i][0])
             
+            print(total)
             Sum = sum(total)
             print(Sum)
 
@@ -289,7 +288,7 @@ def payment(id):
             if int(acc.balanceEnquiry() - payments) > 0:
                 acc.withdraw(payments)
 
-                day = today.strftime("%Y-%m-%d")
+                day = datetime.datetime.now()
                 cur = mysql.connection.cursor()
                 cur.execute(f"insert into accounttransactions values ({id},'{day}','Pay Loan','{payments}')")
                 cur.connection.commit()
@@ -301,7 +300,7 @@ def payment(id):
             elif int(acc.balanceEnquiry() - payments) == 0:
                 acc.withdraw(payments)
 
-                day = today.strftime("%Y-%m-%d")
+                day = datetime.datetime.now()
                 cur = mysql.connection.cursor()
                 cur.execute(f"delete from accounttransactions where accountid='{id}'")
                 cur.connection.commit()
@@ -348,10 +347,11 @@ def deposit(id):
             depo = int(deps)
             acc.deposit(depo)
             
-            day = today.strftime("%Y-%m-%d")
+            day = datetime.datetime.now()
             cur = mysql.connection.cursor()
             cur.execute(f"insert into accounttransactions values ({id},'{day}','Deposit','{depo}')")
             cur.connection.commit()
+            time.sleep(2)
 
             return redirect('/accounts')
             
@@ -388,10 +388,11 @@ def withdraw(id):
             if int(acc.balanceEnquiry() - wits) > - 500000:
                 acc.withdraw(wits)
 
-                day = today.strftime("%Y-%m-%d")
+                day = datetime.datetime.now()
                 cur = mysql.connection.cursor()
                 cur.execute(f"insert into accounttransactions values ({id},'{day}','Withdraw','{wits}')")
                 cur.connection.commit()
+                time.sleep(2)
 
                 return redirect('/accounts')
 
