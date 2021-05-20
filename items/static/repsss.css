@@ -59,7 +59,7 @@ header{
 
 button{
     padding: 9px 25px;
-    background: -webkit-linear-gradient( #4931b3, #18bbd8);
+    background-color:rgb(41, 119, 223);
     border: none;
     border-radius: 50px;
     cursor: pointer;

@@ -9,7 +9,7 @@ html,body{
     display: grid;
     height: 100%;
     width: 100%;
-    background-color:lightblue;
+    background-color: lightblue;
 }
 
 .bar1{
@@ -29,7 +29,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 0px 10%;
-    background-color: rgb(0, 0, 0);
+    background-color: black;
     height: 100px;
     box-shadow: 0 0 10px black;
 }
@@ -61,7 +61,7 @@ header{
 
 button{
     padding: 9px 25px;
-    background: -webkit-linear-gradient( #4931b3, #18bbd8);
+    background-color:rgb(41, 119, 223);
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -103,7 +103,7 @@ button{
 
 
 details{
-   background: -webkit-linear-gradient( #4931b3, #18bbd8);;
+    background-color:rgb(41, 119, 223);
    padding: 10px 20px;
    border-radius: 7px;
    margin-top: 30px;
