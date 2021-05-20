@@ -20,31 +20,48 @@
             </nav>
             <a class="logout" href="/logout"><button>Log Out</button></a>
         </header>
-        <div class="content">
+
+        <div class="wrapper" >
             <div class="message">
                 <h2>Welcome, {{ userlog }}</h2>
-            </div>   
-            <br>
-            <br>
-            <div class = btn-transaksi>
-                <a id="transaksi" href="/accounts/transactions">
-                    <img src="https://visualpharm.com/assets/460/Print-595b40b65ba036ed117d453c.svg" alt="Deposit"
-                    width="150" height="70"> <br> PRINT ACCOUNT TRANSACTION <br>
-                </a>
             </div>
-            <div class="btn-account">
-                <a id="text-account" href="/accounts">
-                    <img id="account" src="https://icon-library.net/images/account-information-icon/account-information-icon-16.jpg"
-                     alt="Show Account" width="80" height="70"> <br> SHOW ACCOUNT 
-                     
-                </a>
+            <div class="content" onclick="location.href='/accounts/transactions'">   
+                <div class = btn-transaksi>
+                    <a id="transaksi" href="/accounts/transactions">
+                        <img src="https://visualpharm.com/assets/460/Print-595b40b65ba036ed117d453c.svg" alt="Deposit"
+                        width="80" height="70">
+                    </a>
+                </div>
+                <div class="txt">
+                    <a>Transactions History</a> <br>
+                    <p style="font-size: 11px; color:gray;">Display all transactions that <br>  have been made on all accounts</p>
+                </div>
             </div>
-            <div class="btn-account">
-                <a id="text-account2" href="/customer/info">
-                    <img id="account2" src="https://img.icons8.com/nolan/64/gender-neutral-user.png"
-                     alt="Show Account" width="80" height="70"> <br> Profile
-                     
-                </a>
+
+            <div class="content" onclick="location.href='/accounts'">
+                <div class="btn-account">
+                    <a id="text-account" href="/accounts">
+                        <img id="account" src="https://icon-library.net/images/account-information-icon/account-information-icon-16.jpg"
+                        alt="Show Account" width="80" height="70">
+                    </a>
+                </div>
+                <div class="txt">
+                    <a>Show Account</a>
+                    <p style="font-size: 11px; color:gray;">Display all accounts info and <br> make transaction on the account</p>
+                </div>
+            </div>
+
+            <div class="content" onclick="location.href='/customer/info'">
+                <div class="btn-account">
+                    <a id="text-account2" href="/customer/info">
+                        <img id="account2" src="https://img.icons8.com/nolan/64/gender-neutral-user.png"
+                        alt="Show Account" width="80" height="70">   
+                    </a>
+                    <div class="txt">
+                        <a>Profile</a>
+                        <p style="font-size: 11px; color:gray;">Display and edit your profile</p>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

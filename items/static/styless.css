@@ -22,7 +22,7 @@ a{
 }
 
 
-header{
+.header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,47 +68,35 @@ button{
 
 
 .content{
-    width: 380px;
+    width: 400px;
     height: 400px;
     position: relative;
     margin: 6% auto;
     background: white;
     padding: 5px;
     overflow: hidden;
+    border-radius: 5px;
+    text-align: center;
 }
 
-h1{
-    position: relative;
-    left: 80px;
-    top: 20px;
-    font-size: 20px;
+.wrapper{
+    display: flex;
+    margin: 0 450px;
 }
 
 
-#text-customer{
+.wrapper a{
+    margin-left: auto;
+    margin-right: auto;
     position: relative;
-    top: 10px;
-    left: 140px;
-    font-size: 20px;
+    top: 100px;
     text-decoration: none;
+    font-size: 30px
 }
 
-#customer{
-    position: relative;
-    top: 20px;
-    left: -30px;
-}
-
-#admin{
-    position: relative;
-    left: -80px;
-    top: -30px;
-}
-
-#text-admin{
-    position: relative;
-    top: 80px;
-    left: 160px;
-    font-size: 20px;
-    text-decoration: none
+.content:hover{
+    transform: scale(1.05);
+    transition: all .5s;
+    z-index: 100;
+    box-shadow: 0 0 10px gray;
 }

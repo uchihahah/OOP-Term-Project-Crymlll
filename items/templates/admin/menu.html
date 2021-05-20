@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head>
         <link rel="icon" href="/static/icon.png">
@@ -36,6 +36,7 @@
                     <img id="account" src="https://img.icons8.com/officel/80/000000/edit-user-male.png"
                      alt="Show Account" width="70" height="70" > <br> REGISTER CUSTOMER <br> <br>  
                 </a>
+            </div>
                 <div>
                     <a id="text-account2" href="/admin/printcustomers">
                         <img id="account" src="https://img.icons8.com/office/80/000000/gender-neutral-user.png"
@@ -48,6 +49,87 @@
                          alt="Show Account" width="70" height="70"><br>ACCOUNTS INFO
                     </a>
                 </div>
+        </div>
+    </body>
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="/static/icon.png">
+        <title>Menu</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='menuadminnns.css')}}">
+        <meta charset="utf-8">
+        <link rel="icon" href="/img/safe_strongbox_money_icon_185919.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <a class="logo" href="/menu"><img src="https://i.postimg.cc/1zxKyBCC/logos.png" alt="Logo"
+                width="500px" height="70px"></a>
+            <nav>
+                <ul class="nav_link">
+                    <li><a class="bar1" href="/aboutus">About Us</a></li>
+                    <li><a class="bar1" href="/faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a class="logout" href="/logout"><button>Log Out</button></a>
+        </header>
+
+        <div class="wrapper" >
+            <div class="message">
+                <h2>Admin Menu</h2>
+            </div>
+            <div class="content" onclick="location.href='/admin/printreports'">   
+                <div class = "btn-transaksi">
+                    <a id="transaksi" href="/admin/printreports">
+                        <img src="https://img.icons8.com/cotton/64/000000/business-report.png" alt="report"
+                        width="70" height="70">
+                    </a>
+                </div>
+                <div class="txt">
+                    <a>Reports</a> <br>
+                    <p style="font-size: 11px; color:gray;">Display all transactions that <br>  have been made by all <br> customers on all accounts</p>
+                </div>
+            </div>
+
+            <div class="content" onclick="location.href='/admin/regcustomer'">
+                <div class="btn-account">
+                    <a id="text-account" href="/admin/regcustomer">
+                        <img id="account" src="https://img.icons8.com/officel/80/000000/edit-user-male.png"
+                         alt="Show Account" width="70" height="70" >  
+                    </a>
+                </div>
+                <div class="txt">
+                    <a>Register Customer</a>
+                    <p style="font-size: 11px; color:gray;">Register a new Customer</p>
+                </div>
+            </div>
+
+            <div class="content" onclick="location.href='/admin/printcustomers'">
+                <div>
+                    <a id="text-account2" href="/admin/printcustomers">
+                        <img id="account" src="https://img.icons8.com/office/80/000000/gender-neutral-user.png"
+                         alt="Show Customers" width="70" height="70">
+                    </a>
+                </div>
+                    <div class="txt">
+                        <a>Customer Info</a>
+                        <p style="font-size: 11px; color:gray;">Display all customers info</p>
+                    </div>
+            </div>
+
+            <div class="content" onclick="location.href='/admin/printaccounts'">
+                <div>
+                    <a id="text-account2" href="/admin/printaccounts">
+                        <img id="account" src="https://img.icons8.com/cotton/64/000000/euro-account.png"
+                         alt="Show Account" width="70" height="70">
+                    </a>
+                </div>
+                    <div class="txt">
+                        <a>Accounts Info</a>
+                        <p style="font-size: 11px; color:gray;">Display all customer's account</p>
+                    </div>
             </div>
         </div>
     </body>

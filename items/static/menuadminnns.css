@@ -29,6 +29,7 @@ header{
     padding: 0px 10%;
     background-color: rgb(0, 0, 0);
     height: 100px;
+    box-shadow: 0 0 10px black;
 }
 
 .logo{
@@ -56,7 +57,7 @@ header{
     color: #18bbd8;
 }
 
-button{
+header button{
     padding: 9px 25px;
     background: -webkit-linear-gradient( #4931b3, #18bbd8);
     border: none;
@@ -66,55 +67,59 @@ button{
     left: 100px;
 }
 
+.wrapper{
+    text-decoration: none;
+    width: 600px;
+    height: 700px;
+    position: relative;
+    margin: 100px auto;
+    background: ghostwhite;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
 .content{
     width: 400px;
-    height: 600px;
+    height: 100px;
     position: relative;
-    margin: 6% auto;
+    margin: 50px auto;
     background: white;
     padding: 5px;
     overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+
 }
 
-h1{
-    position: relative;
-    left: 80px;
-    font-size: 20px;
-}
-
-h2{
+.content img{
     position: relative;
     top: 20px;
-    left: 90px;
-    font-size: 15px;
+    left: 20px;
 }
 
-#transaksi{
+.content p{
     position: relative;
-    font-size: 10px;
+    top: 8px;
+}
+h2{
+    position: relative;
     text-align: center;
-    text-decoration: none
+    font-size: 20px;
+    top: 20px;
 }
 
-.btn-transaksi{
+.content .txt{
     position: relative;
-    font-size: 10px;
-    text-align: center;
-    text-decoration: none
+    top: -50px;
+    left: 120px;
 }
 
-.btn-account{
-    position: relative;
-    font-size: 10px;
-    text-align: center;
-    text-decoration: none
-}
-#text-account{
-    text-decoration: none;
+.content:hover{
+    transform: scale(1.05);
+    transition: all .5s;
+    z-index: 100;
+    box-shadow: 0 0 10px gray;
 }
 
-#text-account2{
-    position: relative;
-    top: 30px;
-    text-decoration: none;
-}

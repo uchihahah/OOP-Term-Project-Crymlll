@@ -74,6 +74,15 @@ button{
     background: white;
     padding: 5px;
     overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 100px black;
+}
+
+.wrapper:hover{
+    transform: scale(1.05);
+    transition: all .5s;
+    z-index: 100;
+    box-shadow: 0 0 10px gray;
 }
 
 .button{
@@ -92,17 +101,6 @@ button{
     outline: none;
     position: relative;
     left: 40px;
-}
-
-#btn{
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 225px;
-    height: 100%;
-    background: linear-gradient(to right, #4931b3, #18bbd8);
-    border-radius: 30px;
-    transition: .5s;
 }
 
 .input{
@@ -135,9 +133,13 @@ button{
     background: linear-gradient(to right, #4931b3, #18bbd8);
     border: 0;
     outline: none;
-    border-radius: 30px;
+    border-radius: 2px;
 }
 
 #customer{
     left: 50px;
+}
+
+h1{
+    text-align: center;
 }
