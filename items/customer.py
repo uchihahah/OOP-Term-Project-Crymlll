@@ -64,7 +64,7 @@ def info():
             address=logdata.Address
             email=logdata.Email
 
-            return render_template('customer/info.html',idcust=idcust,nama=nama,phone=phone,address=address,email=email)
+            return render_template('customer/info.html',idcust=idcust,nama=nama,phone=phone,address=address,email=email,info=logdata)
     except:
         return redirect('/')
 
@@ -243,13 +243,13 @@ def detail(id):
 
             if str(det[0][2]) == "Saving":
                 acc = Saving(det[0][0],det[0][3])
-                return render_template('/accounts/detail/saving.html',id=id, det=det, all=acc)
+                return render_template('/accounts/detail/saving.html',id=id, det=det, all=acc.info())
             elif str(det[0][2]) == "Checking Account":
                 acc = Checking(det[0][0],det[0][3])
-                return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc)
+                return render_template('/accounts/detail/checking.html',id=id, det=det, all=acc.info())
             elif str(det[0][2]) == "Loan":
                 acc = Loan(det[0][0],det[0][3],int(count[0][0]/2),Sum)
-                return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc)
+                return render_template('/accounts/detail/loan.html',id=id, det=det, all=acc.info())
 
     except:
         return redirect('/login')

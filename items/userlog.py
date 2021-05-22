@@ -31,7 +31,7 @@ class Checking(Account):
         else:
             self.__overdraft=0
 
-    def __str__(self):
+    def info(self):
         return (f"Checking Account, Overdraft : {self.__overdraft}")
 
 class Saving(Account):
@@ -42,7 +42,7 @@ class Saving(Account):
     def Interest(self):
         return self.__interestrate
 
-    def __str__(self):
+    def info(self):
         return (f"Saving Account, Interest rate : {self.__interestrate}")
 
 class Loan(Account):
@@ -61,7 +61,7 @@ class Loan(Account):
     def loanduration(self):
         return self.__loanduration
 
-    def __str__(self):
+    def info(self):
         return (f"Loan Account, Interest rate : {self.__interestrate}, Principal Amount : {self.__principalamount}, Loan Duration : {self.__loanduration} month")
 
 class Customer:
@@ -106,7 +106,7 @@ class Customer:
         self.__email=email
     
     def __str__(self):
-        return f'ID : {self.__idpengguna}\nNama: {self.__nama}\nAddress : {self.__address}\nPhone : {self.__phone}\nEmail : {self.__email}'
+        return f' {self.__idpengguna}, {self.__nama}, {self.__address}, {self.__phone}, {self.__email}'
 
     def __del__(self):
         return "Sucessfully Logout"

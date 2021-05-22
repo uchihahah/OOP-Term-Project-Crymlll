@@ -1,6 +1,6 @@
 # OOP-Term-Project-Bank-Management-System
 
-Pemrograman Berorientasi Objeck , Kelas RB 
+Pemrograman Berorientasi Objek , Kelas RB 
 
 Nama Kelompok : Uchihahaha
 
