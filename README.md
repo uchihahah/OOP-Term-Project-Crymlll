@@ -24,7 +24,7 @@ Aplikasi ini menggunakan **framework flask** dan database MYSQL, sehingga untuk 
 List modul yang digunakan terdapat didalam file **requirements.txt**.
 Untuk mendownload **semua modul** yang dibutuhkan dalam menjalankan app ini, ketikkan sintak berikut pada terminal: 
 
-     **pip install -r requirements.txt**
+     pip install -r requirements.txt
 
 
 Cara import database pada MYSQL:
