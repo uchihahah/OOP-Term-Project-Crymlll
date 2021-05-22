@@ -58,12 +58,19 @@
     </a>
 <script>
     function showSuccessAlert(amount) {
-        if(amount != ''){
+        if(amount >= 50000){
             Swal.fire(
                 'Deposit Successful',
                 'Your Balance now update',
                 'success'
             )
+        }
+        else if(amount < 50000){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Insufficient Amount!'
+            })
         }
         else{
             Swal.fire({
