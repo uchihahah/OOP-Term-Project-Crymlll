@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2021 at 09:02 AM
+-- Generation Time: May 23, 2021 at 01:35 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -39,15 +39,16 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`accountid`, `customerid`, `type`, `balance`) VALUES
-(1, 1, 'Loan', 750000),
+(1, 1, 'Loan', 600000),
 (2, 2, 'Loan', 2999998),
-(3, 1, 'Saving', 7150000),
+(3, 1, 'Saving', 8850000),
 (4, 1, 'Checking Account', 3950000),
 (5, 4, 'Saving', 12476000),
 (7, 3, 'Saving', 7650000),
 (8, 3, 'Checking Account', 1800000),
 (9, 4, 'Checking Account', 4950000),
-(11, 4, 'Loan', 1000000);
+(11, 4, 'Loan', 1000000),
+(12, 6, 'Loan', 10000000);
 
 -- --------------------------------------------------------
 
@@ -111,7 +112,13 @@ INSERT INTO `accounttransactions` (`accountid`, `datetime`, `withdraw`, `amount`
 (11, '2021-05-20 00:18:10', 'Pay Loan', 100000),
 (11, '2021-05-20 00:18:10', 'Interest', 22000),
 (3, '2021-05-20 11:22:02', 'Deposit', 1200000),
-(4, '2021-05-20 12:53:50', 'Deposit', 1000000);
+(4, '2021-05-20 12:53:50', 'Deposit', 1000000),
+(1, '2021-05-20 18:52:47', 'Pay Loan', 75000),
+(1, '2021-05-20 18:52:47', 'Interest', 15000),
+(1, '2021-05-20 18:53:35', 'Pay Loan', 75000),
+(1, '2021-05-20 18:53:35', 'Interest', 13500),
+(3, '2021-05-22 14:21:47', 'Deposit', 1200000),
+(3, '2021-05-22 14:27:33', 'Deposit', 500000);
 
 -- --------------------------------------------------------
 
@@ -154,10 +161,11 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customerid`, `name`, `address`, `phone`, `email`, `password`) VALUES
-(1, 'Mohammed', 'Cibinong', '2147483647', 'mohammed@gmail.com', '123456'),
+(1, 'Mohammed', 'Cilebut', '2147483647', 'mohammed@gmail.com', '123456'),
 (2, 'Mustopa', 'Bekasi', '0214323421', 'mustopa@gmail.com', '123456'),
 (3, 'Ali', 'Jawa Barat', '08434213432', 'alisa@gmail.com', 'aaabbbccc'),
-(4, 'Ikura Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com', '123456');
+(4, 'Ikura Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com', '123456'),
+(6, 'dimaskanjeng', 'bandungmaung', '08134123124', 'dimasoji@yahoo.com', 'bangj69');
 
 --
 -- Indexes for dumped tables
