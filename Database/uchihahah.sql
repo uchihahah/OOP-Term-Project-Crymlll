@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2021 at 01:35 PM
+-- Generation Time: May 24, 2021 at 02:36 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -45,10 +45,8 @@ INSERT INTO `accounts` (`accountid`, `customerid`, `type`, `balance`) VALUES
 (4, 1, 'Checking Account', 3950000),
 (5, 4, 'Saving', 12476000),
 (7, 3, 'Saving', 7650000),
-(8, 3, 'Checking Account', 1800000),
 (9, 4, 'Checking Account', 4950000),
-(11, 4, 'Loan', 1000000),
-(12, 6, 'Loan', 10000000);
+(11, 4, 'Loan', 1000000);
 
 -- --------------------------------------------------------
 
@@ -73,7 +71,6 @@ INSERT INTO `accounttransactions` (`accountid`, `datetime`, `withdraw`, `amount`
 (2, '2021-05-12 00:00:00', 'Pay Loan', 333333.2727272727),
 (2, '2021-05-12 00:00:00', 'Interest', 73333.32),
 (7, '2021-05-15 00:00:00', 'Deposit', 500000),
-(8, '2021-05-15 00:00:00', 'Withdraw', 1200000),
 (5, '2021-05-15 00:00:00', 'Deposit', 51520),
 (2, '2021-05-15 00:00:00', 'Pay Loan', 333333.2),
 (2, '2021-05-15 00:00:00', 'Interest', 66666.64),
@@ -164,8 +161,7 @@ INSERT INTO `customers` (`customerid`, `name`, `address`, `phone`, `email`, `pas
 (1, 'Mohammed', 'Cilebut', '2147483647', 'mohammed@gmail.com', '123456'),
 (2, 'Mustopa', 'Bekasi', '0214323421', 'mustopa@gmail.com', '123456'),
 (3, 'Ali', 'Jawa Barat', '08434213432', 'alisa@gmail.com', 'aaabbbccc'),
-(4, 'Ikura Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com', '123456'),
-(6, 'dimaskanjeng', 'bandungmaung', '08134123124', 'dimasoji@yahoo.com', 'bangj69');
+(4, 'Ikuta Lilas', 'Tokyo', '0213343221', 'yoasobi@gmail.com', '123456');
 
 --
 -- Indexes for dumped tables
