@@ -43,7 +43,7 @@ header{
 .nav_link{
     list-style: none;
     position: relative;
-    left: 400px;
+    left: 50px;
 }
 
 .nav_link li{
@@ -87,6 +87,7 @@ button{
    margin: 100px auto;
    position: relative;
    background: #fff;
+   border-radius: 7px;
 }
 
 .box .heading{
