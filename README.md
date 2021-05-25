@@ -13,6 +13,10 @@ Anggota :
  
 BANK MANAGEMENT SYSTEM
 
+Untuk Laporan dan PPT dapat dilihat pada folder Document.
+
+Untuk Database terdapat pada folder Database.
+
 Untuk menjalankan Aplikasi ini dibutuhkan:
 1. XAMPP - https://www.apachefriends.org/download.html
 2. IDE python / VSCode - https://code.visualstudio.com/download

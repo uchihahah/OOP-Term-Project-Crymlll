@@ -134,6 +134,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`nim`, `namaAdmin`, `password`) VALUES
+('admin', 'admin', 'admin'),
 ('119140007', 'Cahya Andy Mareza', '2001-03-04'),
 ('119140110', 'Aulia Rahman Zulfi', '2001-02-09'),
 ('119140217', 'Fadhil Azhar Alsani', '2000-10-27');
